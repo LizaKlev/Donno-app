@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/app/globals.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "iconLibrary": "lucide",
+  "aliases": {
+    "components": "donno-app/components",
+    "utils": "donno-app/lib/utils",
+    "ui": "donno-app/components/ui",
+    "lib": "donno-app/lib",
+    "hooks": "donno-app/hooks"
+  },
+  "registries": {}
+}
