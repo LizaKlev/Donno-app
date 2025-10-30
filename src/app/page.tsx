@@ -25,7 +25,7 @@ export default function Page() {
   }
 
   return (
-    <div className='h-full flex flex-col justify-between'>
+    <div className='h-full flex flex-col justify-between px-2'>
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -42,7 +42,7 @@ export default function Page() {
         </BreadcrumbList>
       </Breadcrumb>
       <Input placeholder='Search...' />
-      <div className='grid grid-cols-6 gap-2'>
+      <div className='grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2'>
         {genres.map((genre) => (
           <GenreCard
             key={genre.title}
