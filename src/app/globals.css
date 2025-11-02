@@ -73,8 +73,8 @@
   --color-button-secondary-text: var(--white-100);
 
   /* Input colors */
-  --color-input-bg: var(--white-12);
-  --color-input-text: var(--white-100);
+  --color-white-4: var(--white-4);
+  --color-white-100: var(--white-100);
 
   /* Footer colors */
   --color-footer-bg: var(--black-150);
@@ -164,7 +164,7 @@
   --red-100: #c13629;
   --red-200: rgba(193, 54, 41, 0.7);
   --red-300: rgba(193, 54, 41, 0.6);
-  --red-400: rrgba(239, 241, 244, 0.12) --white-12: rgba(239, 241, 244, 0.12);
+  --red-400: rgba(239, 241, 244, 0.12) --white-12: rgba(239, 241, 244, 0.12);
   --white-2: rgba(239, 241, 244, 0.02);
   --white-4: rgba(239, 241, 244, 0.04);
   --white-40: rgba(239, 241, 244, 0.4);
