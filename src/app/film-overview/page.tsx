@@ -8,6 +8,8 @@ import {
   BreadcrumbSeparator,
 } from 'donno-app/components/ui/breadcrumb'
 import { Box } from 'lucide-react'
+import { Badge } from 'donno-app/components/ui/badge'
+import { Button } from 'donno-app/components/ui/button'
 
 const page = () => {
   return (
@@ -37,6 +39,18 @@ const page = () => {
         <p id='role' className='w-full'>
           Actor
         </p>
+        <div className='flex w-full'>
+          <Badge variant='secondary'>Action</Badge>
+          <Badge variant='secondary'>Action</Badge>
+          <Badge variant='secondary'>Action</Badge>
+          <Badge variant='secondary'>Action</Badge>
+        </div>
+      </div>
+      <div className='flex w-full justify-center gap-4'>
+        <Button variant={'secondary'} className='w-1/3'>
+          Apply
+        </Button>
+        <Button className='w-1/3'>Reset</Button>
       </div>
     </div>
   )

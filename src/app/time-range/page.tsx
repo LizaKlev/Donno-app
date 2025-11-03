@@ -8,6 +8,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from 'donno-app/components/ui/breadcrumb'
+import { Button } from 'donno-app/components/ui/button'
 
 const page = () => {
   return (
@@ -34,6 +35,12 @@ const page = () => {
         max={100}
         step={1}
       />
+      <div className='flex w-full justify-center gap-4'>
+        <Button variant={'secondary'} className='w-1/3'>
+          Apply
+        </Button>
+        <Button className='w-1/3'>Reset</Button>
+      </div>
     </div>
   )
 }

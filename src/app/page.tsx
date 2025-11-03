@@ -53,6 +53,12 @@ export default function Page() {
           />
         ))}
       </div>
+      <div className='flex w-full justify-center gap-4 mb-1'>
+        <Button variant={'secondary'} className='w-1/3'>
+          Apply
+        </Button>
+        <Button className='w-1/3'>Reset</Button>
+      </div>
     </div>
   )
 }
