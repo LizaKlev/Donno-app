@@ -15,6 +15,7 @@ import { Box } from 'lucide-react'
 import { Badge } from 'donno-app/components/ui/badge'
 import { Button } from 'donno-app/components/ui/button'
 import { MovieCast } from 'donno-app/components/castCard'
+import { ReviewsSection } from 'donno-app/components/ReviewsSection'
 import SimilarMovies from 'donno-app/components/similarMovies'
 
 const TABS = [
@@ -134,6 +135,8 @@ const page = () => {
           <SimilarMovies />
         </div>
       </div>
+      <p>Reviews</p>
+      <ReviewsSection />
     </div>
   )
 }
