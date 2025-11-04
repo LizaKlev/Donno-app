@@ -1,3 +1,7 @@
+'use client'
+
+import { useState } from 'react'
+
 import { Input } from 'donno-app/components/ui/input'
 import {
   Breadcrumb,
@@ -10,22 +14,33 @@ import {
 import { Box } from 'lucide-react'
 import { Badge } from 'donno-app/components/ui/badge'
 import { Button } from 'donno-app/components/ui/button'
+import { MovieCast } from 'donno-app/components/castCard'
+import SimilarMovies from 'donno-app/components/similarMovies'
+
+const TABS = [
+  { id: 'cast', label: 'Cast' },
+  { id: 'platforms', label: 'Platforms' },
+  { id: 'crew', label: 'Crew' },
+  { id: 'awards', label: 'Awards' },
+]
 
 const page = () => {
+  // default to 'cast'
+  const [activeTab, setActiveTab] = useState('cast')
   return (
-    <div>
+    <div className='w-full overflow-hidden mb-40'>
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+            <BreadcrumbLink href='/'>Genre</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink href='/components'>Components</BreadcrumbLink>
+            <BreadcrumbLink href='/time-range'>Time</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+            <BreadcrumbPage>Film overview</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -33,24 +48,91 @@ const page = () => {
       {/* <img src='/slider.png' alt='Slider component' width='full' height={400} /> */}
       <div className='w-full flex flex-col items-center justify-center'>
         <Box className='w-3/4 bg-accent h-96 text-muted-foreground max-lg:w-3/4' />
-        <p id='actors-name' className='w-full'>
-          Tilda Swindton
+        <p id='film-name' className='w-full'>
+          The Grand Budapest Hotel
         </p>
-        <p id='role' className='w-full'>
-          Actor
+        <p id='duration' className='w-full'>
+          169 min
         </p>
         <div className='flex w-full'>
-          <Badge variant='secondary'>Action</Badge>
-          <Badge variant='secondary'>Action</Badge>
-          <Badge variant='secondary'>Action</Badge>
-          <Badge variant='secondary'>Action</Badge>
+          <Badge variant='secondary'>Adventure</Badge>
+          <Badge variant='secondary'>Comedy</Badge>
+          <Badge variant='secondary'>Crime</Badge>
+        </div>
+
+        <div className='flex gap-4 w-full'>
+          <div className='flex flex-col'>
+            <p>Country</p>
+            <p>USA</p>
+          </div>
+          <div className='flex flex-col'>
+            <p>Language</p>
+            <p>English</p>
+          </div>
+          <div className='flex flex-col'>
+            <p>Year</p>
+            <p>2014</p>
+          </div>
+          <div className='flex flex-col'>
+            <p>Awards</p>
+            <p>153 wins</p>
+          </div>
+          <div className='flex flex-col'>
+            <p>Nominations</p>
+            <p>253 nominations</p>
+          </div>
+        </div>
+        <p>
+          A MURDER CASE OF MADAM D. WITH ENORMOUS WEALTH AND THE MOST OUTRAGEOUS
+          EVENTS SURROUNDING HER SUDDEN DEATH!
+        </p>
+        <p>
+          The Grand Budapest Hotel tells of a legendary concierge at a famous
+          European hotel between the wars and his friendship with a young
+          employee who becomes his trusted protégé. The story involves the theft
+          and recovery of a priceless Renaissance painting, the battle for an
+          enormous family fortune and the slow and then sudden upheavals that
+          transformed Europe during the first half of the 20th century.
+        </p>
+
+        {/* --- TABS MENU --- */}
+        <div className='flex w-full lg:w-2/3 justify-between border border-white/10 rounded-full'>
+          {TABS.map((tab) => (
+            <Button
+              key={tab.id}
+              variant={activeTab === tab.id ? 'default' : 'ghost'}
+              onClick={() => setActiveTab(tab.id)}
+              className={
+                activeTab === tab.id
+                  ? 'font-semibold'
+                  : 'opacity-60 hover:opacity-100'
+              }
+            >
+              {tab.label}
+            </Button>
+          ))}
+        </div>
+
+        {/* --- TAB CONTENT --- */}
+        <div className='w-full mt-6'>
+          {activeTab === 'cast' && (
+            <div className='w-full overflow-x-auto'>
+              <div className='flex gap-4 w-max pb-2'>
+                <MovieCast />
+                {/* Add more <MovieCast /> items or map over data to populate the row */}
+              </div>
+            </div>
+          )}
+          {activeTab === 'platforms' && <p>Platforms list will go here.</p>}
+          {activeTab === 'crew' && <p>Crew members list will go here.</p>}
+          {activeTab === 'awards' && <p>Awards list will go here.</p>}
         </div>
       </div>
-      <div className='flex w-full justify-center gap-4'>
-        <Button variant={'secondary'} className='w-1/3'>
-          Apply
-        </Button>
-        <Button className='w-1/3'>Reset</Button>
+      <p>SIMILAR MOVIES</p>
+      <div className='w-full overflow-x-auto'>
+        <div className='flex gap-4 w-max pb-2'>
+          <SimilarMovies />
+        </div>
       </div>
     </div>
   )

@@ -1,0 +1,65 @@
+:root {
+  /* Global Variables */
+  --black-100: #111111;
+  --black-200: #b8b8b8;
+  --green-100: #1d773b;
+  --green-200: rgba(29, 119, 59, 0.7);
+  --green-300: rgba(29, 119, 59, 0.6);
+  --green-400: rgba(29, 119, 59, 0.08);
+  --red-100: #c13629;
+  --red-200: rgba(193, 54, 41, 0.7);
+  --red-300: rgba(193, 54, 41, 0.6);
+  --red-400: rgba(193, 54, 41, 0.08);
+  --yellow-100: #f5c518;
+  --yellow-200: rgba(245, 197, 24, 0.7);
+  --yellow-300: rgba(245, 197, 24, 0.6);
+  --yellow-400: rgba(245, 197, 24, 0.08);
+  --genres-orange: #f45a02;
+  --genres-green: #58ac82;
+  --genres-lightOrange: #fe8100;
+  --genres-yellow: #f1de44;
+  --genres-darkGreen: #366a42;
+  --genres-gray: #525c70;
+  --genres-blue: #4694ff;
+  --genres-purple: #a68efc;
+  --genres-red: #c0272d;
+  --genres-brown: #c99a6e;
+  --genres-dark: #191b2b;
+  --genres-darkPink: #b74695;
+  --genres-pink: #d892b5;
+  --genres-greenish: #50aca6;
+  --genres-darkRed: #6e161a;
+  --genres-muddyGreen: #618c76;
+  --genres-darkBrown: #bd784a;
+  --white-2: rgba(239, 241, 244, 0.02);
+  --white-4: rgba(239, 241, 244, 0.04);
+  --white-12: rgba(239, 241, 244, 0.12);
+  --white-40: rgba(239, 241, 244, 0.4);
+  --white-50: rgba(239, 241, 244, 0.5);
+  --white-60: rgba(239, 241, 244, 0.6);
+  --white-70: rgba(239, 241, 244, 0.7);
+  --white-80: rgba(239, 241, 244, 0.8);
+  --white-90: rgba(239, 241, 244, 0.9);
+  --white-100: #eff1f4;
+
+  /* Semantic Variables */
+  --semantic-icon-bg-light: var(--white-4);
+  --semantic-icon-bg-intense: var(--white-50);
+  --semantic-icon-bg-mid: var(--white-12);
+  --semantic-icon-border: var(--white-12);
+  --semantic-icon-fill: var(--white-90);
+  --semantic-icon-fill-dark: var(--black-100);
+  --semantic-text-40: var(--white-40);
+  --semantic-text-50: var(--white-50);
+  --semantic-text-70: var(--white-70);
+  --semantic-text-100: var(--white-100);
+  --semantic-text-dark: var(--black-100);
+  --semantic-chip-bg: var(--white-12);
+  --semantic-chip-fill: var(--white-70);
+  --semantic-chip-yellow: var(--yellow-100);
+  --semantic-button-secondary-bg: var(--white-4);
+  --semantic-button-secondary-border: var(--white-12);
+  --semantic-button-secondary-text: var(--white-100);
+  --semantic-button-primary-bg: var(--white-100);
+  --semantic-button-primary-text: var(--black-100);
+}
