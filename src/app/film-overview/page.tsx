@@ -19,6 +19,16 @@ import { ReviewsSection } from 'donno-app/components/ReviewsSection'
 import SimilarMovies from 'donno-app/components/similarMovies'
 import { PlatformList } from 'donno-app/components/PlatformCard'
 import { NomineeCard } from 'donno-app/components/AwardCard'
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from 'donno-app/components/ui/drawer'
 
 const TABS = [
   { id: 'cast', label: 'Cast' },
@@ -49,6 +59,23 @@ const page = () => {
       </Breadcrumb>
       <Input placeholder='Search...' />
       {/* <img src='/slider.png' alt='Slider component' width='full' height={400} /> */}
+
+      <Drawer>
+        <DrawerTrigger>Open</DrawerTrigger>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+            <DrawerDescription>This action cannot be undone.</DrawerDescription>
+          </DrawerHeader>
+          <DrawerFooter>
+            <Button>Submit</Button>
+            <DrawerClose>
+              <Button variant='outline'>Cancel</Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+
       <div className='w-full flex flex-col items-center justify-center'>
         <Box className='w-3/4 bg-accent h-96 text-muted-foreground max-lg:w-3/4' />
         <p id='film-name' className='w-full'>
