@@ -17,6 +17,8 @@ import { Button } from 'donno-app/components/ui/button'
 import { MovieCast } from 'donno-app/components/castCard'
 import { ReviewsSection } from 'donno-app/components/ReviewsSection'
 import SimilarMovies from 'donno-app/components/similarMovies'
+import { PlatformList } from 'donno-app/components/PlatformCard'
+import { NomineeCard } from 'donno-app/components/AwardCard'
 
 const TABS = [
   { id: 'cast', label: 'Cast' },
@@ -120,13 +122,30 @@ const page = () => {
             <div className='w-full overflow-x-auto'>
               <div className='flex gap-4 w-max pb-2'>
                 <MovieCast />
-                {/* Add more <MovieCast /> items or map over data to populate the row */}
               </div>
             </div>
           )}
-          {activeTab === 'platforms' && <p>Platforms list will go here.</p>}
-          {activeTab === 'crew' && <p>Crew members list will go here.</p>}
-          {activeTab === 'awards' && <p>Awards list will go here.</p>}
+          {activeTab === 'platforms' && (
+            <div className='w-full overflow-x-auto'>
+              <div className='flex gap-4 w-max pb-2'>
+                <PlatformList />
+              </div>
+            </div>
+          )}
+          {activeTab === 'crew' && (
+            <div className='w-full overflow-x-auto'>
+              <div className='flex gap-4 w-max pb-2'>
+                <MovieCast />
+              </div>
+            </div>
+          )}
+          {activeTab === 'awards' && (
+            <div className='w-full overflow-x-auto'>
+              <div className='flex gap-4 w-max pb-2'>
+                <NomineeCard />
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <p>SIMILAR MOVIES</p>
