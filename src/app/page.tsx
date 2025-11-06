@@ -3,7 +3,6 @@ import { useState } from 'react'
 
 import { Input } from '../components/ui/input'
 import { Button } from '../components/ui/button'
-import { InputGroupButton } from '../components/ui/input-group'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -48,6 +47,7 @@ export default function Page() {
             key={genre.title}
             title={genre.title}
             color={genre.color}
+            span={genre.span}
             selected={selectedGenres.includes(genre.title)}
             onToggle={() => toggleGenre(genre.title)}
           />

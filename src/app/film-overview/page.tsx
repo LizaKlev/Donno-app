@@ -49,7 +49,7 @@ const page = () => {
   // default to 'cast'
   const [activeTab, setActiveTab] = useState('cast')
   return (
-    <div className='w-full overflow-hidden mb-40'>
+    <div className='w-full overflow-hidden mb-40 mx-4 max-w-6xl'>
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>

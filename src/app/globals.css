@@ -75,7 +75,10 @@
 
   /* Input colors */
   --color-white-4: var(--white-4);
+  --color-white-40: var(--white-40);
+  --color-white-12: var(--white-12);
   --color-white-100: var(--white-100);
+  --color-black-40: var(--black-40);
 
   /* Footer colors */
   --color-footer-bg: var(--black-150);
@@ -126,8 +129,9 @@
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
+
+  --sidebar: rgba(17, 17, 17, 0.4);
+  --sidebar-foreground: rgba(239, 241, 244, 0.8);
   --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
@@ -136,6 +140,8 @@
   --sidebar-ring: oklch(0.708 0 0);
 
   --black-100: #111111;
+  --black-40: rgba(17, 17, 17, 0.4);
+
   --black-150: rgba(17, 17, 17, 0.45);
   --black-200: #b8b8b8;
 
@@ -165,9 +171,10 @@
   --red-100: #c13629;
   --red-200: rgba(193, 54, 41, 0.7);
   --red-300: rgba(193, 54, 41, 0.6);
-  --red-400: rgba(239, 241, 244, 0.12) --white-12: rgba(239, 241, 244, 0.12);
+  --red-400: rgba(239, 241, 244, 0.12);
   --white-2: rgba(239, 241, 244, 0.02);
   --white-4: rgba(239, 241, 244, 0.04);
+  --white-12: rgba(239, 241, 244, 0.12);
   --white-40: rgba(239, 241, 244, 0.4);
   --white-50: rgba(239, 241, 244, 0.5);
   --white-60: rgba(239, 241, 244, 0.6);

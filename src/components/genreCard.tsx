@@ -3,6 +3,7 @@ type GenreCardProps = {
   color: string
   selected: boolean
   onToggle: () => void
+  span?: number
 }
 
 export function GenreCard({
@@ -10,6 +11,7 @@ export function GenreCard({
   color,
   selected,
   onToggle,
+  span,
 }: GenreCardProps) {
   return (
     <button
@@ -17,6 +19,7 @@ export function GenreCard({
       className={`
         h-36 rounded-3xl flex justify-center items-center font-semibold text-lg transition-transform duration-200
         ${color}
+          ${span ? `col-span-${span}` : ''}
         ${selected ? 'ring-4 ring-white scale-105' : 'opacity-90 hover:scale-105 hover:shadow-xl'}
       `}
     >
