@@ -24,23 +24,47 @@ export default function Page() {
   }
 
   return (
-    <div className='h-full flex flex-col justify-between px-2'>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbPage>Genre</BreadcrumbPage>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href='/time-range'>Time</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href='/film-overview'>Film overview</BreadcrumbLink>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      <Input placeholder='Search...' />
+    <div className='h-full flex flex-col justify-between px-2 pb-20 '>
+      <div className='sticky top-0 left-0 z-20 w-screen px-2 bg-linear-to-b from-background via-background to-background/10'>
+        <div className='mx-auto '>
+          <div className='items-center justify-between py-2'>
+            <div className='pb-3'>
+              <Breadcrumb>
+                <BreadcrumbList>
+                
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>Genre</BreadcrumbPage>
+                  </BreadcrumbItem>
+
+                  <BreadcrumbSeparator />
+
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href='/time-range'>Time</BreadcrumbLink>
+                  </BreadcrumbItem>
+
+                  <BreadcrumbSeparator />
+
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href='/recommendations'>Recommendations</BreadcrumbLink>
+                  </BreadcrumbItem>
+
+                  <BreadcrumbSeparator />
+
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href='/film-overview'>Film overview</BreadcrumbLink>
+                  </BreadcrumbItem>
+
+                </BreadcrumbList>
+              </Breadcrumb>
+            </div>
+            <div>
+              {/* <p className='md:hidden'>Select Genres</p> */}
+              <Input placeholder='Search...' />
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className='grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2'>
         {genres.map((genre) => (
           <GenreCard

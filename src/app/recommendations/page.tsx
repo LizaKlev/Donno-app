@@ -8,7 +8,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from 'donno-app/components/ui/breadcrumb'
-import { Button } from 'donno-app/components/ui/button'
+import { RecommendationCard } from 'donno-app/components/Recommendations'
 
 const page = () => {
   return (
@@ -18,34 +18,43 @@ const page = () => {
           <BreadcrumbItem>
             <BreadcrumbLink href='/'>Genre</BreadcrumbLink>
           </BreadcrumbItem>
+
           <BreadcrumbSeparator />
+
           <BreadcrumbItem>
-            <BreadcrumbPage>Time</BreadcrumbPage>
+            <BreadcrumbLink href='/time-range'>Time</BreadcrumbLink>
           </BreadcrumbItem>
+
           <BreadcrumbSeparator />
+
           <BreadcrumbItem>
-            <BreadcrumbLink href='/recommendations'>
-              Recommendations
-            </BreadcrumbLink>
+            <BreadcrumbPage>Recommendations</BreadcrumbPage>
           </BreadcrumbItem>
+
           <BreadcrumbSeparator />
+
           <BreadcrumbItem>
             <BreadcrumbLink href='/film-overview'>Film overview</BreadcrumbLink>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
       <Input placeholder='Search...' />
-      <Slider
-        // defaultValue={[20, 80]} min={0} max={100}
-        defaultValue={[33]}
-        max={100}
-        step={1}
-      />
-      <div className='flex w-full justify-center gap-4'>
-        <Button variant={'secondary'} className='w-1/3'>
-          Apply
-        </Button>
-        <Button className='w-1/3'>Reset</Button>
+
+      {/* so, here is the recommendations section */}
+      <div className='grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2'>
+        <RecommendationCard />
+      </div>
+
+      <div className='grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2'>
+        {/* {Recommendations.map((recommendation) => (
+          <RecommendationCard
+            key={recommendation.title}
+            id={recommendation.id}
+            name={recommendation.name}
+            percentage={recommendation.percentage}
+            image={recommendation.image}
+          />
+        ))} */}
       </div>
     </div>
   )

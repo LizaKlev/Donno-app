@@ -49,7 +49,7 @@ const page = () => {
   // default to 'cast'
   const [activeTab, setActiveTab] = useState('cast')
   return (
-    <div className='w-full overflow-hidden mb-40 mx-4 max-w-6xl'>
+    <div className='overflow-hidden mb-40 mx-4 max-w-6xl'>
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -58,6 +58,12 @@ const page = () => {
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink href='/time-range'>Time</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href='/recommendations'>
+              Recommendations
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
