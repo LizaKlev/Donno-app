@@ -1,9 +1,11 @@
 import React from 'react'
+import { Star } from 'lucide-react'
 
 export interface Recommendation {
   id: number
   name: string
   percentage: string
+  imdb: number
   image?: string
 }
 
@@ -14,80 +16,91 @@ export interface Recommendation {
 export const sampleRecommendation: Recommendation[] = [
   {
     id: 1,
-    name: 'Ralph Fiennes',
+    name: 'Lord of the Rings: The Return of the King',
     percentage: '99% match',
+    imdb: 5,
     image: undefined,
   },
   {
     id: 2,
-    name: 'Tony Revolori',
+    name: 'The Lord of the Rings: The Two Towers',
     percentage: '97% match',
+    imdb: 6.8,
     image: undefined,
   },
   {
     id: 3,
-    name: 'Saoirse Ronan',
+    name: 'The Lord of the Rings: The Fellowship of the Ring',
     percentage: '90% match',
+    imdb: 8.8,
     image: undefined,
   },
   {
     id: 4,
-    name: 'Tilda Swinton',
+    name: 'The Hobbit: The Battle of the Five Armies',
     percentage: '80% match',
+    imdb: 7.5,
     image: undefined,
   },
   {
     id: 5,
-    name: 'Willem Dafoe',
+    name: 'The Hobbit: The Desolation of Smaug',
     percentage: '60% match',
+    imdb: 7.2,
     image: undefined,
   },
   {
     id: 6,
-    name: 'Adrien Brody',
+    name: 'Harry Potter and the Deathly Hallows - Part 2',
     percentage: '30% match',
+    imdb: 7.6,
     image: undefined,
   },
   {
     id: 7,
-    name: 'Jude Law',
+    name: 'Harry Potter and the Deathly Hallows - Part 1',
     percentage: '20% match',
+    imdb: 7.4,
     image: undefined,
   },
   {
     id: 8,
-    name: 'Edward Norton',
+    name: 'Harry Potter and the Half-Blood Prince',
     percentage: '15% match',
+    imdb: 7.6,
     image: undefined,
   },
   {
     id: 9,
-    name: 'Bill Murray',
+    name: 'Harry Potter and the Order of the Phoenix',
     percentage: '10% match',
+    imdb: 7.6,
     image: undefined,
   },
 ]
 
 /**
  * Single cast card component.
- * Expects a Recommendation passed as the `member` prop.
+ * Expects a Recommendation passed as the `film` prop.
  */
-const CastCard: React.FC<{ member: Recommendation }> = ({ member }) => {
+export const RecommendationCard: React.FC<{ film: Recommendation }> = ({
+  film,
+}) => {
   return (
     <div className='flex flex-col items-center gap-3 p-2 bg-white-4 rounded'>
-      {member.image ? (
+      {film.image ? (
         <img
-          src={member.image}
-          alt={member.name}
+          src={film.image}
+          alt={film.name}
           width={63}
           height={63}
-          className='w-[63px] h-[63px] object-cover rounded'
+          className='w-[182px] h-[222px] object-cover rounded'
         />
       ) : (
         <div
           role='img'
-          aria-label={`${member.name} placeholder`}
-          className='w-[63px] h-[63px] bg-gray-200 rounded flex items-center justify-center'
+          aria-label={`${film.name} placeholder`}
+          className='w-[182px] h-[222px] bg-gray-200 rounded flex items-center justify-center'
         >
           <svg
             viewBox='0 0 24 24'
@@ -102,26 +115,32 @@ const CastCard: React.FC<{ member: Recommendation }> = ({ member }) => {
         </div>
       )}
       <div className='text-sm'>
-        <div className='font-semibold'>{member.name}</div>
-        <div className='text-gray-700'>{member.percentage}</div>
+        <div className='font-semibold'>{film.name}</div>
+        <div className='flex justify-between'>
+          <div className='text-gray-700'>{film.percentage}</div>
+          <div className='text-gray-700 flex items-center gap-1'>
+            <Star className='w-4 h-4' />
+            <span>{film.imdb}</span>
+          </div>
+        </div>
       </div>
     </div>
   )
 }
 
-export default CastCard
+export default RecommendationCard
 
 /**
  * Optional: a simple MovieCast component that renders the sample cast.
  * Import and use <MovieCast /> where you want to display the list.
  */
-export const RecommendationCard: React.FC<{ cast?: Recommendation[] }> = ({
+export const RecommendationList: React.FC<{ cast?: Recommendation[] }> = ({
   cast = sampleRecommendation,
 }) => {
   return (
-    <div className='flex gap-6'>
+    <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2'>
       {cast.map((m) => (
-        <CastCard key={m.id} member={m} />
+        <RecommendationCard key={m.id} film={m} />
       ))}
     </div>
   )
