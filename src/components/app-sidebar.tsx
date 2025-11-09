@@ -40,7 +40,7 @@ const items = [
 
 export function AppSidebar() {
   return (
-    <Sidebar collapsible='offcanvas' variant='floating' alwaysOverlay>
+    <Sidebar collapsible='offcanvas' variant='floating'>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>

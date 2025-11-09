@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { Star } from 'lucide-react'
 
 export interface Recommendation {
@@ -87,7 +88,10 @@ export const RecommendationCard: React.FC<{ film: Recommendation }> = ({
   film,
 }) => {
   return (
-    <div className='flex flex-col items-center gap-3 p-2 bg-white-4 rounded'>
+    <Link
+      href='/film-overview'
+      className='flex flex-col items-center gap-3 bg-white-4 rounded cursor-pointer hover:bg-white-8 transition-colors'
+    >
       {film.image ? (
         <img
           src={film.image}
@@ -100,7 +104,7 @@ export const RecommendationCard: React.FC<{ film: Recommendation }> = ({
         <div
           role='img'
           aria-label={`${film.name} placeholder`}
-          className='w-[182px] h-[222px] bg-gray-200 rounded flex items-center justify-center'
+          className='w-full h-[222px] bg-gray-200 rounded flex items-center justify-center'
         >
           <svg
             viewBox='0 0 24 24'
@@ -124,7 +128,7 @@ export const RecommendationCard: React.FC<{ film: Recommendation }> = ({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

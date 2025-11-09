@@ -33,10 +33,13 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from 'donno-app/components/ui/dialog'
+import { RoundButton } from 'donno-app/components/ui/roundButton'
+import { useIsMobile } from 'donno-app/hooks/use-mobile'
 
 const TABS = [
   { id: 'cast', label: 'Cast' },
@@ -45,84 +48,57 @@ const TABS = [
   { id: 'awards', label: 'Awards' },
 ]
 
-const page = () => {
+const Page = () => {
   // default to 'cast'
   const [activeTab, setActiveTab] = useState('cast')
+  const isMobile = useIsMobile()
   return (
-    <div className='overflow-hidden mb-40 mx-4 max-w-6xl'>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href='/'>Genre</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href='/time-range'>Time</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href='/recommendations'>
-              Recommendations
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Film overview</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      <Input placeholder='Search...' />
-      {/* <img src='/slider.png' alt='Slider component' width='full' height={400} /> */}
-
-      <div className='flex gap-3'>
-        <Drawer>
-          <DrawerTrigger>Drawer down</DrawerTrigger>
-          <DrawerContent>
-            <DrawerHeader>
-              <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-              <DrawerDescription>
-                This action cannot be undone.
-              </DrawerDescription>
-            </DrawerHeader>
-            <DrawerFooter>
-              <Button>Submit</Button>
-              <DrawerClose>
+    <div className='max-w-6xl w-full  px-2 pb-20'>
+      <div className='sticky top-3.5 left-3.5 right-3.5 z-50 flex justify-between'>
+        <RoundButton
+          variant='primary'
+          href='/recommendations'
+          icon='chevron-left'
+        />
+        {isMobile ? (
+          <Drawer direction='top'>
+            <DrawerTrigger asChild>
+              <RoundButton variant='secondary' icon='hamburger' />
+            </DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader>
+                <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                <DrawerDescription>
+                  This action cannot be undone.
+                </DrawerDescription>
+              </DrawerHeader>
+              <DrawerFooter>
+                <Button>Submit</Button>
+                <DrawerClose>
+                  <Button variant='outline'>Cancel</Button>
+                </DrawerClose>
+              </DrawerFooter>
+            </DrawerContent>
+          </Drawer>
+        ) : (
+          <Dialog>
+            <DialogTrigger asChild>
+              <RoundButton variant='secondary' icon='hamburger' />
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Are you absolutely sure?</DialogTitle>
+                <DialogDescription>
+                  This action cannot be undone.
+                </DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <Button>Submit</Button>
                 <Button variant='outline'>Cancel</Button>
-              </DrawerClose>
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer>
-
-        <Drawer direction='top'>
-          <DrawerTrigger>Drawer up</DrawerTrigger>
-          <DrawerContent>
-            <DrawerHeader>
-              <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-              <DrawerDescription>
-                This action cannot be undone.
-              </DrawerDescription>
-            </DrawerHeader>
-            <DrawerFooter>
-              <Button>Submit</Button>
-              <DrawerClose>
-                <Button variant='outline'>Cancel</Button>
-              </DrawerClose>
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer>
-
-        <Dialog>
-          <DialogTrigger>Dialog</DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Are you absolutely sure?</DialogTitle>
-              <DialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
-              </DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        )}
       </div>
 
       <div className='w-full flex flex-col items-center justify-center'>
@@ -236,4 +212,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
