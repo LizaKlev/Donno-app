@@ -1,6 +1,6 @@
-import type { movieOverview } from './review'
+import type { filmOverview } from './review'
 
-export const sampleMovieOverview: movieOverview = {
+export const sampleMovieOverview: filmOverview = {
   name: 'The Grand Budapest Hotel',
   duration: '169 min',
   genres: ['Adventure', 'Comedy', 'Crime'],

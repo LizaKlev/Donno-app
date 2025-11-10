@@ -14,7 +14,7 @@ export interface Review {
   sentiment?: 'positive' | 'neutral' | 'negative'
 }
 
-export interface cast {
+export interface filmOverview {
   name: string
   duration: string
   genres?: (
@@ -73,6 +73,7 @@ export interface actorOverview {
   age: number
   birthDate: string
   deathDate: string
+  birthplace: string
   awardsNumber: number
   nominationsNumber: number
   bio: string
@@ -81,4 +82,10 @@ export interface actorOverview {
     year: number
     image: string
   }[]
+  nominations: {
+    name: string
+    year: number
+    image: string
+  }[]
+  movieNumber: number
 }

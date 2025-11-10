@@ -21,14 +21,15 @@ import { DialogFooter } from 'donno-app/components/ui/dialog'
 import { Box } from 'lucide-react'
 import { Badge } from 'donno-app/components/ui/badge'
 import { MovieCast } from 'donno-app/components/castCard'
+import { sampleActorOverview } from 'donno-app/app/data/actorOverview'
 import { PlatformList } from 'donno-app/components/PlatformCard'
 import { NomineeCard } from 'donno-app/components/AwardCard'
 
 const TABS = [
-  { id: 'cast', label: 'Cast' },
-  { id: 'platforms', label: 'Platforms' },
-  { id: 'crew', label: 'Crew' },
-  { id: 'awards', label: 'Awards' },
+  { id: 'cast', label: 'Known For' },
+  { id: 'recentMovies', label: 'Recent Movies' },
+  { id: 'allFilms', label: 'All Films' },
+  { id: 'upcoming', label: 'Upcoming' },
 ]
 
 const Page = () => {
@@ -85,53 +86,69 @@ const Page = () => {
 
       <div className='w-full flex flex-col items-center justify-center'>
         <Box className='w-3/4 bg-accent h-96 text-muted-foreground max-lg:w-3/4' />
-        <p id='film-name' className='w-full'>
-          The Grand Budapest Hotel
-        </p>
-        <p id='duration' className='w-full'>
-          169 min
-        </p>
-        <div className='flex w-full'>
-          <Badge variant='secondary'>Adventure</Badge>
-          <Badge variant='secondary'>Comedy</Badge>
-          <Badge variant='secondary'>Crime</Badge>
-        </div>
+        <div className='w-full flex justify-between'>
+          <p className='w-full'>{sampleActorOverview.name}</p>
 
+          {isMobile ? (
+            <Drawer direction='top'>
+              <DrawerTrigger asChild>
+                <RoundButton variant='secondary' icon='hamburger' />
+              </DrawerTrigger>
+              <DrawerContent>
+                <DrawerHeader>
+                  <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                  <DrawerDescription>
+                    This action cannot be undone.
+                  </DrawerDescription>
+                </DrawerHeader>
+                <DrawerFooter>
+                  <Button>Submit</Button>
+                  <DrawerClose>
+                    <Button variant='outline'>Cancel</Button>
+                  </DrawerClose>
+                </DrawerFooter>
+              </DrawerContent>
+            </Drawer>
+          ) : (
+            <Dialog>
+              <DialogTrigger asChild>
+                <RoundButton variant='primary' icon='user' />
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Are you absolutely sure?</DialogTitle>
+                  <DialogDescription>
+                    This action cannot be undone.
+                  </DialogDescription>
+                </DialogHeader>
+                <DialogFooter>
+                  <Button>Submit</Button>
+                  <Button variant='outline'>Cancel</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          )}
+        </div>
+        <p className='w-full'>{sampleActorOverview.position}</p>
         <div className='flex gap-4 w-full'>
           <div className='flex flex-col'>
-            <p>Country</p>
-            <p>USA</p>
+            <p>Age</p>
+            <p>{sampleActorOverview.age}</p>
           </div>
           <div className='flex flex-col'>
-            <p>Language</p>
-            <p>English</p>
-          </div>
-          <div className='flex flex-col'>
-            <p>Year</p>
-            <p>2014</p>
+            <p>Born</p>
+            <p>{sampleActorOverview.birthplace}</p>
           </div>
           <div className='flex flex-col'>
             <p>Awards</p>
-            <p>153 wins</p>
+            <p>{sampleActorOverview.awardsNumber}</p>
           </div>
           <div className='flex flex-col'>
             <p>Nominations</p>
-            <p>253 nominations</p>
+            <p>{sampleActorOverview.nominationsNumber}</p>
           </div>
         </div>
-        <p>
-          A MURDER CASE OF MADAM D. WITH ENORMOUS WEALTH AND THE MOST OUTRAGEOUS
-          EVENTS SURROUNDING HER SUDDEN DEATH!
-        </p>
-        <p>
-          The Grand Budapest Hotel tells of a legendary concierge at a famous
-          European hotel between the wars and his friendship with a young
-          employee who becomes his trusted protégé. The story involves the theft
-          and recovery of a priceless Renaissance painting, the battle for an
-          enormous family fortune and the slow and then sudden upheavals that
-          transformed Europe during the first half of the 20th century.
-        </p>
-
+        <p className='w-full'>{sampleActorOverview.bio}</p>
         {/* --- TABS MENU --- */}
         <div className='flex w-full lg:w-2/3 justify-between border border-white/10 rounded-full'>
           {TABS.map((tab) => (
@@ -149,37 +166,48 @@ const Page = () => {
             </Button>
           ))}
         </div>
-
         {/* --- TAB CONTENT --- */}
         <div className='w-full mt-6'>
-          {activeTab === 'cast' && (
+          {activeTab === 'knownFor' && (
             <div className='w-full overflow-x-auto'>
               <div className='flex gap-4 w-max pb-2'>
                 <MovieCast />
               </div>
             </div>
           )}
-          {activeTab === 'platforms' && (
+          {activeTab === 'recentMovies' && (
             <div className='w-full overflow-x-auto'>
               <div className='flex gap-4 w-max pb-2'>
                 <PlatformList />
               </div>
             </div>
           )}
-          {activeTab === 'crew' && (
+          {activeTab === 'allFilms' && (
             <div className='w-full overflow-x-auto'>
               <div className='flex gap-4 w-max pb-2'>
                 <MovieCast />
               </div>
             </div>
           )}
-          {activeTab === 'awards' && (
+          {activeTab === 'upcoming' && (
             <div className='w-full overflow-x-auto'>
               <div className='flex gap-4 w-max pb-2'>
-                <NomineeCard />
+                <MovieCast />
               </div>
             </div>
           )}
+        </div>
+      </div>
+      <p>Awards</p>
+      <div className='w-full overflow-x-auto'>
+        <div className='flex gap-4 w-max pb-2'>
+          <NomineeCard />
+        </div>
+      </div>
+      <p>You might also like</p>
+      <div className='w-full overflow-x-auto'>
+        <div className='flex gap-4 w-max pb-2'>
+          <MovieCast />
         </div>
       </div>
     </div>
