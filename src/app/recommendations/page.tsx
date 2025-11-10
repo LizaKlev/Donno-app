@@ -28,11 +28,7 @@ const Page = () => {
   return (
     <div className='px-2 pb-20 '>
       <div className='sticky top-3.5 left-3.5 right-3.5 z-50 flex justify-between'>
-        <RoundButton
-          variant='primary'
-          href='/recommendations'
-          icon='chevron-left'
-        />
+        <RoundButton variant='primary' href='/time-range' icon='chevron-left' />
         {isMobile ? (
           <Drawer direction='top'>
             <DrawerTrigger asChild>

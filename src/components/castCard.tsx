@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 export interface CastMember {
   id: number
@@ -74,7 +75,10 @@ export const sampleCast: CastMember[] = [
  */
 const CastCard: React.FC<{ member: CastMember }> = ({ member }) => {
   return (
-    <div className='flex flex-col items-center gap-3 p-2 bg-white-4 rounded'>
+    <Link
+      href='/actor-overview'
+      className='flex flex-col items-center gap-3 p-2 bg-white-4 rounded cursor-pointer hover:bg-white-8 transition-colors'
+    >
       {member.image ? (
         <img
           src={member.image}
@@ -105,7 +109,7 @@ const CastCard: React.FC<{ member: CastMember }> = ({ member }) => {
         <div className='font-semibold'>{member.name}</div>
         <div className='text-gray-700'>{member.role}</div>
       </div>
-    </div>
+    </Link>
   )
 }
 
