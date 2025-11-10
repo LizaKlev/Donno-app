@@ -10,6 +10,8 @@ import { ReviewsSection } from 'donno-app/components/ReviewsSection'
 import SimilarMovies from 'donno-app/components/similarMovies'
 import { PlatformList } from 'donno-app/components/PlatformCard'
 import { NomineeCard } from 'donno-app/components/AwardCard'
+import { toast } from 'sonner'
+
 import {
   Drawer,
   DrawerClose,
@@ -94,12 +96,30 @@ const Page = () => {
 
       <div className='w-full flex flex-col items-center justify-center'>
         <Box className='w-3/4 bg-accent h-96 text-muted-foreground max-lg:w-3/4' />
-        <p id='film-name' className='w-full'>
-          The Grand Budapest Hotel
-        </p>
-        <p id='duration' className='w-full'>
-          169 min
-        </p>
+        <div className='w-full flex flex-row justify-between'>
+          <div className=''>
+            <p id='film-name' className='w-full'>
+              The Grand Budapest Hotel
+            </p>
+            <p id='duration' className='w-full'>
+              169 min
+            </p>
+          </div>
+          <div className='flex gap-1'>
+            <RoundButton
+              className='w-fit h-fit'
+              variant='primary'
+              icon='check'
+              onClick={() => toast.success('Film is marked as Watched')}
+            ></RoundButton>
+
+            <RoundButton
+              className='w-fit h-fit'
+              variant='primary'
+              icon='heart'
+            />
+          </div>
+        </div>
         <div className='flex w-full'>
           <Badge variant='secondary'>Adventure</Badge>
           <Badge variant='secondary'>Comedy</Badge>

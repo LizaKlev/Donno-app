@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { ChevronLeft, Menu, User } from 'lucide-react'
+import { ChevronLeft, Menu, User, Heart, CheckIcon } from 'lucide-react'
 
 import { cn } from 'donno-app/lib/utils'
 
@@ -49,7 +49,7 @@ function RoundButton({
 }: (React.ComponentProps<'button'> | React.ComponentProps<'a'>) &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean
-    icon?: 'chevron-left' | 'hamburger' | 'user'
+    icon?: 'chevron-left' | 'hamburger' | 'user' | 'heart' | 'check'
     href?: string
   }) {
   const renderIcon = () => {
@@ -61,6 +61,12 @@ function RoundButton({
     }
     if (icon === 'user') {
       return <User />
+    }
+    if (icon === 'heart') {
+      return <Heart />
+    }
+    if (icon === 'check') {
+      return <CheckIcon />
     }
     return null
   }
