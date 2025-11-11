@@ -1,6 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import { Star } from 'lucide-react'
+import { sampleMovieOverview } from '../app/data/movieOverview'
+import { sampleReviews } from '../app/data/sampleReviews'
+import type { Review } from '../app/data/review'
 
 export interface Recommendation {
   id: number

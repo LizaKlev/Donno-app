@@ -1,9 +1,6 @@
 'use client'
 
-import {
-  RecommendationList,
-  sampleRecommendation,
-} from 'donno-app/components/Recommendations'
+import { RecommendationList } from 'donno-app/components/Recommendations'
 import { RoundButton } from 'donno-app/components/ui/roundButton'
 import { Drawer } from 'donno-app/components/ui/drawer'
 import { DrawerTrigger } from 'donno-app/components/ui/drawer'
@@ -71,7 +68,7 @@ const Page = () => {
       </div>
 
       <div>
-        <RecommendationList cast={sampleRecommendation} />
+        <RecommendationList />
       </div>
     </div>
   )

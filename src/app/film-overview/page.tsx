@@ -11,6 +11,7 @@ import SimilarMovies from 'donno-app/components/similarMovies'
 import { PlatformList } from 'donno-app/components/PlatformCard'
 import { NomineeCard } from 'donno-app/components/AwardCard'
 import { toast } from 'sonner'
+import { sampleMovieOverview } from '../data/movieOverview'
 
 import {
   Drawer,
@@ -45,6 +46,7 @@ const Page = () => {
   // default to 'cast'
   const [activeTab, setActiveTab] = useState('cast')
   const isMobile = useIsMobile()
+  const movie = sampleMovieOverview[0]
   return (
     <div className='max-w-6xl w-full  px-2 pb-20'>
       <div className='sticky top-3.5 left-3.5 right-3.5 z-50 flex justify-between'>
@@ -98,12 +100,9 @@ const Page = () => {
         <Box className='w-3/4 bg-accent h-96 text-muted-foreground max-lg:w-3/4' />
         <div className='w-full flex flex-row justify-between'>
           <div className=''>
-            <p id='film-name' className='w-full'>
-              The Grand Budapest Hotel
-            </p>
-            <p id='duration' className='w-full'>
-              169 min
-            </p>
+            <p>{movie.name}</p>
+
+            <p>{movie.duration}</p>
           </div>
           <div className='flex gap-1'>
             <RoundButton
@@ -112,12 +111,12 @@ const Page = () => {
               icon='check'
               onClick={() => toast.success('Film is marked as Watched')}
             ></RoundButton>
-
             <RoundButton
               className='w-fit h-fit'
               variant='primary'
               icon='heart'
-            />
+              onClick={() => toast.success('Film is added to your Liked films')}
+            ></RoundButton>
           </div>
         </div>
         <div className='flex w-full'>
@@ -129,37 +128,27 @@ const Page = () => {
         <div className='flex gap-4 w-full'>
           <div className='flex flex-col'>
             <p>Country</p>
-            <p>USA</p>
+            <p>{movie.country}</p>
           </div>
           <div className='flex flex-col'>
             <p>Language</p>
-            <p>English</p>
+            <p>{movie.language}</p>
           </div>
           <div className='flex flex-col'>
             <p>Year</p>
-            <p>2014</p>
+            <p>{movie.year}</p>
           </div>
           <div className='flex flex-col'>
             <p>Awards</p>
-            <p>153 wins</p>
+            <p>{movie.awardsNumber}</p>
           </div>
           <div className='flex flex-col'>
             <p>Nominations</p>
-            <p>253 nominations</p>
+            <p>{movie.nominationsNumber}</p>
           </div>
         </div>
-        <p>
-          A MURDER CASE OF MADAM D. WITH ENORMOUS WEALTH AND THE MOST OUTRAGEOUS
-          EVENTS SURROUNDING HER SUDDEN DEATH!
-        </p>
-        <p>
-          The Grand Budapest Hotel tells of a legendary concierge at a famous
-          European hotel between the wars and his friendship with a young
-          employee who becomes his trusted protégé. The story involves the theft
-          and recovery of a priceless Renaissance painting, the battle for an
-          enormous family fortune and the slow and then sudden upheavals that
-          transformed Europe during the first half of the 20th century.
-        </p>
+        <p>{movie.description}</p>
+        <p>{movie.storyline}</p>
 
         {/* --- TABS MENU --- */}
         <div className='flex w-full lg:w-2/3 justify-between border border-white/10 rounded-full'>
