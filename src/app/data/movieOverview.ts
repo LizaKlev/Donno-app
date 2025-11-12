@@ -4,6 +4,7 @@ export const sampleMovieOverview: filmOverview[] = [
   {
     name: 'The Grand Budapest Hotel',
     duration: '169 min',
+    imdb: 8.1,
     genres: ['Adventure', 'Comedy', 'Crime'],
     country: 'USA',
     language: 'English',
@@ -63,6 +64,7 @@ export const sampleMovieOverview: filmOverview[] = [
   {
     name: 'Moonrise Kingdom',
     duration: '94 min',
+    imdb: 7.8,
     genres: ['Comedy', 'Drama', 'Romance'],
     country: 'USA',
     language: 'English',
@@ -128,6 +130,7 @@ export const sampleMovieOverview: filmOverview[] = [
   {
     name: 'The Royal Tenenbaums',
     duration: '110 min',
+    imdb: 7.6,
     genres: ['Comedy', 'Drama'],
     country: 'USA',
     language: 'English',
@@ -193,6 +196,7 @@ export const sampleMovieOverview: filmOverview[] = [
   {
     name: 'The French Dispatch',
     duration: '108 min',
+    imdb: 7.1,
     genres: ['Comedy', 'Drama', 'Romance'],
     country: 'USA',
     language: 'English',
@@ -258,6 +262,7 @@ export const sampleMovieOverview: filmOverview[] = [
   {
     name: 'Isle of Dogs',
     duration: '101 min',
+    imdb: 7.8,
     genres: ['Adventure', 'Comedy', 'Drama'],
     country: 'USA',
     language: 'English',
@@ -323,6 +328,7 @@ export const sampleMovieOverview: filmOverview[] = [
   {
     name: 'Fantastic Mr. Fox',
     duration: '87 min',
+    imdb: 7.9,
     genres: ['Adventure', 'Comedy', 'Fantasy'],
     country: 'USA',
     language: 'English',

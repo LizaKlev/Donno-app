@@ -17,6 +17,9 @@ export interface Review {
 export interface filmOverview {
   name: string
   duration: string
+  imdb: number
+  matchPercentage?: string
+  posterImage?: string
   genres?: (
     | 'Adventure'
     | 'Comedy'

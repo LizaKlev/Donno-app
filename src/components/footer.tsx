@@ -1,10 +1,14 @@
 import React from 'react'
+import Link from 'next/link'
 
 const footer = () => {
   return (
     <div className='fixed bottom-0 left-0 z-50 w-full h-16 bg-black-40 dark:bg-gray-700 md:hidden backdrop-blur-[9.3px]'>
       <div className='grid h-full max-w-lg grid-cols-3 mx-auto font-medium'>
-        <button className='inline-flex flex-col items-center justify-center px-5 group'>
+        <Link
+          href='/'
+          className='inline-flex flex-col items-center justify-center px-5 group'
+        >
           <svg
             className='w-5 h-5 mb-2 text-text-100 dark:text-text-100'
             aria-hidden='true'
@@ -18,8 +22,12 @@ const footer = () => {
           <span className='text-sm text-text-100 dark:text-gray-400'>
             Recommend
           </span>
-        </button>
-        <button className='inline-flex flex-col items-center justify-center px-5 group'>
+        </Link>
+
+        <Link
+          href='/home'
+          className='inline-flex flex-col items-center justify-center px-5 group'
+        >
           <svg
             className='w-5 h-5 mb-2 text-text-100 dark:text-gray-400'
             aria-hidden='true'
@@ -29,15 +37,19 @@ const footer = () => {
           >
             <path
               stroke='currentColor'
-              stroke-linecap='round'
-              stroke-linejoin='round'
-              stroke-width='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth='2'
               d='M4 12.25V1m0 11.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M4 19v-2.25m6-13.5V1m0 2.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M10 19V7.75m6 4.5V1m0 11.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM16 19v-2'
             />
           </svg>
           <span className='text-sm text-text-100 dark:text-gray-400'>Home</span>
-        </button>
-        <button className='inline-flex flex-col items-center justify-center px-5 group'>
+        </Link>
+
+        <Link
+          href='/'
+          className='inline-flex flex-col items-center justify-center px-5 group'
+        >
           <svg
             className='w-5 h-5 mb-2 text-text-100 dark:text-gray-400'
             aria-hidden='true'
@@ -50,7 +62,7 @@ const footer = () => {
           <span className='text-sm text-text-100 dark:text-gray-400'>
             Discover
           </span>
-        </button>
+        </Link>
       </div>
     </div>
   )

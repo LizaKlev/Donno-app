@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 
-import { Box } from 'lucide-react'
+import { Box, Heart, Plus } from 'lucide-react'
 import { Badge } from 'donno-app/components/ui/badge'
 import { Button } from 'donno-app/components/ui/button'
 import { MovieCast } from 'donno-app/components/castCard'
@@ -15,12 +16,8 @@ import { sampleMovieOverview } from '../data/movieOverview'
 
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
   DrawerTrigger,
 } from 'donno-app/components/ui/drawer'
 import {
@@ -35,6 +32,14 @@ import {
 import { RoundButton } from 'donno-app/components/ui/roundButton'
 import { useIsMobile } from 'donno-app/hooks/use-mobile'
 
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from 'donno-app/components/ui/accordion'
+import { Separator } from 'donno-app/components/ui/separator'
+
 const TABS = [
   { id: 'cast', label: 'Cast' },
   { id: 'platforms', label: 'Platforms' },
@@ -42,11 +47,25 @@ const TABS = [
   { id: 'awards', label: 'Awards' },
 ]
 
+// Icon for the "Add to favourite" button - change this to use a different icon
+const FAVOURITE_ICON = Heart
+
 const Page = () => {
   // default to 'cast'
   const [activeTab, setActiveTab] = useState('cast')
   const isMobile = useIsMobile()
-  const movie = sampleMovieOverview[0]
+  const searchParams = useSearchParams()
+  const movieParam = searchParams.get('movie')
+  const selectedMovie = useMemo(() => {
+    if (!movieParam) {
+      return null
+    }
+    const decodedName = decodeURIComponent(movieParam)
+    return sampleMovieOverview.find(
+      (item) => item.name.toLowerCase() === decodedName.toLowerCase()
+    )
+  }, [movieParam])
+  const movie = selectedMovie ?? sampleMovieOverview[0]
   return (
     <div className='max-w-6xl w-full  px-2 pb-20'>
       <div className='sticky top-3.5 left-3.5 right-3.5 z-50 flex justify-between'>
@@ -58,38 +77,225 @@ const Page = () => {
         {isMobile ? (
           <Drawer direction='top'>
             <DrawerTrigger asChild>
-              <RoundButton variant='secondary' icon='hamburger' />
+              <button
+                type='button'
+                className='rounded-full outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring'
+              >
+                <RoundButton variant='secondary' icon='hamburger' />
+              </button>
             </DrawerTrigger>
-            <DrawerContent>
-              <DrawerHeader>
-                <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-                <DrawerDescription>
-                  This action cannot be undone.
-                </DrawerDescription>
-              </DrawerHeader>
-              <DrawerFooter>
-                <Button>Submit</Button>
-                <DrawerClose>
-                  <Button variant='outline'>Cancel</Button>
-                </DrawerClose>
+            <DrawerContent className='gap-0 border-[0.3px] border-white-12 mx-2.5'>
+              <div className='flex items-center gap-2 pb-3 '>
+                <Box className='w-[32px] h-[32px] bg-accent text-accent-foreground rounded-[8px]' />
+                <p> {movie.name} </p>
+              </div>
+              <Separator />
+              <DrawerFooter className='p-0'>
+                <Button
+                  variant='ghost'
+                  className='justify-start hover:text-bold hover:bg-white-4 '
+                  onClick={() =>
+                    toast.success('Film is added to your Liked films')
+                  }
+                >
+                  <FAVOURITE_ICON className='size-4' />
+                  Add to favourite
+                </Button>
+                <Accordion type='single' collapsible className='p-0'>
+                  <AccordionItem value='item-1' className='p-0'>
+                    <AccordionTrigger className='p-x pt-2.5 pb-2 hover:bg-white-4 rounded-full w-full items-baseline px-3'>
+                      <div className='flex gap-1.5'>
+                        <FAVOURITE_ICON className='size-4' />
+                        Add to watchlist
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className='p-0'>
+                      <Button
+                        variant='ghost'
+                        className='justify-start w-full pl-8.5 text-white/70 hover:bg-white/0 hover:text-white/90'
+                        onClick={() =>
+                          toast.success('Film is added to your Liked films')
+                        }
+                      >
+                        New folder
+                      </Button>
+
+                      <Button
+                        variant='ghost'
+                        className='justify-start w-full pl-8.5 text-white/70 hover:bg-white/0 hover:text-white/90'
+                        onClick={() =>
+                          toast.success('Film is added to your Liked films')
+                        }
+                      >
+                        Top Films
+                      </Button>
+                      <Button
+                        variant='ghost'
+                        className='justify-start w-full pl-8.5 text-white/70 hover:bg-white/0 hover:text-white/90'
+                        onClick={() =>
+                          toast.success('Film is added to your Liked films')
+                        }
+                      >
+                        My top B&W films
+                      </Button>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+                <Button
+                  variant='ghost'
+                  className='justify-start hover:text-bold hover:bg-white-4 '
+                  onClick={() =>
+                    toast.success('Film is added to your Liked films')
+                  }
+                >
+                  <FAVOURITE_ICON className='size-4' />
+                  Share
+                </Button>
+                <Button
+                  variant='ghost'
+                  className='justify-start hover:text-bold hover:bg-white-4 '
+                  onClick={() =>
+                    toast.success('Film is added to your Liked films')
+                  }
+                >
+                  <FAVOURITE_ICON className='size-4' />
+                  Add to roulette
+                </Button>
+                <Button
+                  variant='ghost'
+                  className='justify-start hover:text-bold hover:bg-white-4 '
+                  onClick={() =>
+                    toast.success('Film is added to your Liked films')
+                  }
+                >
+                  <FAVOURITE_ICON className='size-4' />
+                  Do not recommend this film to me again
+                </Button>
+                <Button
+                  variant='ghost'
+                  className='justify-start hover:text-bold hover:bg-white-4 '
+                  onClick={() =>
+                    toast.success('Film is added to your Liked films')
+                  }
+                >
+                  <FAVOURITE_ICON className='size-4' />
+                  Already watched
+                </Button>
               </DrawerFooter>
             </DrawerContent>
           </Drawer>
         ) : (
           <Dialog>
             <DialogTrigger asChild>
-              <RoundButton variant='secondary' icon='hamburger' />
+              <button
+                type='button'
+                className='rounded-full outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring'
+              >
+                <RoundButton variant='secondary' icon='hamburger' />
+              </button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Are you absolutely sure?</DialogTitle>
-                <DialogDescription>
-                  This action cannot be undone.
-                </DialogDescription>
+                <div className='flex items-center gap-2 pb-3'>
+                  <Box className='w-[32px] h-[32px] bg-accent text-accent-foreground rounded-[8px]' />
+                  <p> {movie.name} </p>
+                </div>{' '}
               </DialogHeader>
+              <Separator />
+
               <DialogFooter>
-                <Button>Submit</Button>
-                <Button variant='outline'>Cancel</Button>
+                <div className='flex flex-col w-full'>
+                  <Button
+                    variant='ghost'
+                    className='justify-start hover:text-bold hover:bg-white-4 '
+                    onClick={() =>
+                      toast.success('Film is added to your Liked films')
+                    }
+                  >
+                    <FAVOURITE_ICON className='size-4' />
+                    Add to favourite
+                  </Button>
+                  <Accordion type='single' collapsible className='p-0'>
+                    <AccordionItem value='item-1' className='p-0'>
+                      <AccordionTrigger className='p-x pt-2.5 pb-2 hover:bg-white-4 rounded-full w-full items-baseline px-3'>
+                        <div className='flex gap-1.5'>
+                          <FAVOURITE_ICON className='size-4' />
+                          Add to watchlist
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent className='p-0'>
+                        <Button
+                          variant='ghost'
+                          className='justify-start w-full pl-8.5 text-white/70 hover:bg-white/0 hover:text-white/90'
+                          onClick={() =>
+                            toast.success('Film is added to your Liked films')
+                          }
+                        >
+                          New folder
+                        </Button>
+
+                        <Button
+                          variant='ghost'
+                          className='justify-start w-full pl-8.5 text-white/70 hover:bg-white/0 hover:text-white/90'
+                          onClick={() =>
+                            toast.success('Film is added to your Liked films')
+                          }
+                        >
+                          Top Films
+                        </Button>
+                        <Button
+                          variant='ghost'
+                          className='justify-start w-full pl-8.5 text-white/70 hover:bg-white/0 hover:text-white/90'
+                          onClick={() =>
+                            toast.success('Film is added to your Liked films')
+                          }
+                        >
+                          My top B&W films
+                        </Button>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                  <Button
+                    variant='ghost'
+                    className='justify-start hover:text-bold hover:bg-white-4 '
+                    onClick={() =>
+                      toast.success('Film is added to your Liked films')
+                    }
+                  >
+                    <FAVOURITE_ICON className='size-4' />
+                    Share
+                  </Button>
+                  <Button
+                    variant='ghost'
+                    className='justify-start hover:text-bold hover:bg-white-4 '
+                    onClick={() =>
+                      toast.success('Film is added to your Liked films')
+                    }
+                  >
+                    <FAVOURITE_ICON className='size-4' />
+                    Add to roulette
+                  </Button>
+                  <Button
+                    variant='ghost'
+                    className='justify-start hover:text-bold hover:bg-white-4 '
+                    onClick={() =>
+                      toast.success('Film is added to your Liked films')
+                    }
+                  >
+                    <FAVOURITE_ICON className='size-4' />
+                    Do not recommend this film to me again
+                  </Button>
+                  <Button
+                    variant='ghost'
+                    className='justify-start hover:text-bold hover:bg-white-4 '
+                    onClick={() =>
+                      toast.success('Film is added to your Liked films')
+                    }
+                  >
+                    <FAVOURITE_ICON className='size-4' />
+                    Already watched
+                  </Button>
+                </div>
               </DialogFooter>
             </DialogContent>
           </Dialog>
@@ -99,7 +305,7 @@ const Page = () => {
       <div className='w-full flex flex-col items-center justify-center'>
         <Box className='w-3/4 bg-accent h-96 text-muted-foreground max-lg:w-3/4' />
         <div className='w-full flex flex-row justify-between'>
-          <div className=''>
+          <div>
             <p>{movie.name}</p>
 
             <p>{movie.duration}</p>
@@ -119,10 +325,12 @@ const Page = () => {
             ></RoundButton>
           </div>
         </div>
-        <div className='flex w-full'>
-          <Badge variant='secondary'>Adventure</Badge>
-          <Badge variant='secondary'>Comedy</Badge>
-          <Badge variant='secondary'>Crime</Badge>
+        <div className='flex w-full flex-wrap gap-2'>
+          {movie.genres?.map((genre) => (
+            <Badge key={genre} variant='secondary'>
+              {genre}
+            </Badge>
+          ))}
         </div>
 
         <div className='flex gap-4 w-full'>

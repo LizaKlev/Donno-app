@@ -1,32 +1,35 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import { Drawer as DrawerPrimitive } from "vaul"
+import * as React from 'react'
+import { Drawer as DrawerPrimitive } from 'vaul'
+import { cn } from 'donno-app/lib/utils'
 
-import { cn } from "donno-app/lib/utils"
+/* ──────────────────────────────────────────────
+   Base Drawer Components
+────────────────────────────────────────────── */
 
 function Drawer({
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) {
-  return <DrawerPrimitive.Root data-slot="drawer" {...props} />
+  return <DrawerPrimitive.Root data-slot='drawer' {...props} />
 }
 
 function DrawerTrigger({
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Trigger>) {
-  return <DrawerPrimitive.Trigger data-slot="drawer-trigger" {...props} />
+  return <DrawerPrimitive.Trigger data-slot='drawer-trigger' {...props} />
 }
 
 function DrawerPortal({
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Portal>) {
-  return <DrawerPrimitive.Portal data-slot="drawer-portal" {...props} />
+  return <DrawerPrimitive.Portal data-slot='drawer-portal' {...props} />
 }
 
 function DrawerClose({
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Close>) {
-  return <DrawerPrimitive.Close data-slot="drawer-close" {...props} />
+  return <DrawerPrimitive.Close data-slot='drawer-close' {...props} />
 }
 
 function DrawerOverlay({
@@ -35,9 +38,11 @@ function DrawerOverlay({
 }: React.ComponentProps<typeof DrawerPrimitive.Overlay>) {
   return (
     <DrawerPrimitive.Overlay
-      data-slot="drawer-overlay"
+      data-slot='drawer-overlay'
       className={cn(
-        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
+        'fixed inset-0 z-50 bg-black/50 transition-opacity',
+        'data-[state=open]:animate-in data-[state=open]:fade-in-0',
+        'data-[state=closed]:animate-out data-[state=closed]:fade-out-0',
         className
       )}
       {...props}
@@ -45,39 +50,66 @@ function DrawerOverlay({
   )
 }
 
+/* ──────────────────────────────────────────────
+   Drawer Content (with variant support)
+────────────────────────────────────────────── */
+
+type DrawerVariant = 'recommendation' | 'film' | 'folder' | 'me'
+
 function DrawerContent({
   className,
   children,
+  variant = 'recommendation',
   ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Content>) {
+}: React.ComponentProps<typeof DrawerPrimitive.Content> & {
+  variant?: DrawerVariant
+}) {
+  const variantStyles: Record<DrawerVariant, string> = {
+    recommendation: 'bg-white-80 text-white backdrop-blur-sm',
+    film: 'bg-white-80 text-white backdrop-blur-sm',
+    folder: 'bg-white-80 text-white backdrop-blur-sm',
+    me: 'bg-white-80 text-white backdrop-blur-sm',
+  }
+
+  const variantLayout: Record<DrawerVariant, string> = {
+    recommendation: 'rounded-b-[2rem] p-8',
+    film: 'p-0 overflow-hidden rounded-t-2xl',
+    folder: 'p-6 shadow-xl rounded-t-3xl',
+    me: 'p-8 border-t-2 border-blue-300 rounded-t-3xl',
+  }
+
   return (
-    <DrawerPortal data-slot="drawer-portal">
+    <DrawerPortal>
       <DrawerOverlay />
       <DrawerPrimitive.Content
-        data-slot="drawer-content"
+        data-slot='drawer-content'
         className={cn(
-          "group/drawer-content bg-background fixed z-50 flex h-auto flex-col",
-          "data-[vaul-drawer-direction=top]:inset-x-0 data-[vaul-drawer-direction=top]:top-0 data-[vaul-drawer-direction=top]:mb-24 data-[vaul-drawer-direction=top]:max-h-[80vh] data-[vaul-drawer-direction=top]:rounded-b-lg data-[vaul-drawer-direction=top]:border-b",
-          "data-[vaul-drawer-direction=bottom]:inset-x-0 data-[vaul-drawer-direction=bottom]:bottom-0 data-[vaul-drawer-direction=bottom]:mt-24 data-[vaul-drawer-direction=bottom]:max-h-[80vh] data-[vaul-drawer-direction=bottom]:rounded-t-lg data-[vaul-drawer-direction=bottom]:border-t",
-          "data-[vaul-drawer-direction=right]:inset-y-0 data-[vaul-drawer-direction=right]:right-0 data-[vaul-drawer-direction=right]:w-3/4 data-[vaul-drawer-direction=right]:border-l data-[vaul-drawer-direction=right]:sm:max-w-sm",
-          "data-[vaul-drawer-direction=left]:inset-y-0 data-[vaul-drawer-direction=left]:left-0 data-[vaul-drawer-direction=left]:w-3/4 data-[vaul-drawer-direction=left]:border-r data-[vaul-drawer-direction=left]:sm:max-w-sm",
+          'group/drawer-content fixed z-50 flex flex-col shadow-lg transition-all',
+          'data-[vaul-drawer-direction=top]:inset-x-0 data-[vaul-drawer-direction=top]:top-0 data-[vaul-drawer-direction=top]:max-h-[85vh]',
+          variantStyles[variant],
+          variantLayout[variant],
           className
         )}
         {...props}
       >
-        <div className="bg-muted mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
+        {/* drag handle for mobile */}
+        {/* <div className='mx-auto mt-2 h-1.5 w-[60px] rounded-full bg-white/30 group-data-[vaul-drawer-direction=top]/drawer-content:block' /> */}
         {children}
       </DrawerPrimitive.Content>
     </DrawerPortal>
   )
 }
 
-function DrawerHeader({ className, ...props }: React.ComponentProps<"div">) {
+/* ──────────────────────────────────────────────
+   Drawer Layout Helpers
+────────────────────────────────────────────── */
+
+function DrawerHeader({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
-      data-slot="drawer-header"
+      data-slot='drawer-header'
       className={cn(
-        "flex flex-col gap-0.5 p-4 group-data-[vaul-drawer-direction=bottom]/drawer-content:text-center group-data-[vaul-drawer-direction=top]/drawer-content:text-center md:gap-1.5 md:text-left",
+        'flex flex-col gap-1 p-4 text-center md:text-left',
         className
       )}
       {...props}
@@ -85,11 +117,11 @@ function DrawerHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function DrawerFooter({ className, ...props }: React.ComponentProps<"div">) {
+function DrawerFooter({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
-      data-slot="drawer-footer"
-      className={cn("mt-auto flex flex-col gap-2 p-4", className)}
+      data-slot='drawer-footer'
+      className={cn('mt-auto flex flex-col gap-2 p-4', className)}
       {...props}
     />
   )
@@ -101,8 +133,8 @@ function DrawerTitle({
 }: React.ComponentProps<typeof DrawerPrimitive.Title>) {
   return (
     <DrawerPrimitive.Title
-      data-slot="drawer-title"
-      className={cn("text-foreground font-semibold", className)}
+      data-slot='drawer-title'
+      className={cn('font-semibold text-foreground', className)}
       {...props}
     />
   )
@@ -114,12 +146,40 @@ function DrawerDescription({
 }: React.ComponentProps<typeof DrawerPrimitive.Description>) {
   return (
     <DrawerPrimitive.Description
-      data-slot="drawer-description"
-      className={cn("text-muted-foreground text-sm", className)}
+      data-slot='drawer-description'
+      className={cn('text-sm text-muted-foreground', className)}
       {...props}
     />
   )
 }
+
+/* ──────────────────────────────────────────────
+   Named Variants (Optional Semantic Imports)
+────────────────────────────────────────────── */
+
+export function RecommendationDrawer(
+  props: React.ComponentProps<typeof DrawerContent>
+) {
+  return <DrawerContent variant='recommendation' {...props} />
+}
+
+export function FilmDrawer(props: React.ComponentProps<typeof DrawerContent>) {
+  return <DrawerContent variant='film' {...props} />
+}
+
+export function FolderDrawer(
+  props: React.ComponentProps<typeof DrawerContent>
+) {
+  return <DrawerContent variant='folder' {...props} />
+}
+
+export function MeDrawer(props: React.ComponentProps<typeof DrawerContent>) {
+  return <DrawerContent variant='me' {...props} />
+}
+
+/* ──────────────────────────────────────────────
+   Exports
+────────────────────────────────────────────── */
 
 export {
   Drawer,
