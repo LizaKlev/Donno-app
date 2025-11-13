@@ -1,5 +1,6 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
+import Link from 'next/link'
 import { useIsMobile } from 'donno-app/hooks/use-mobile'
 
 import {
@@ -130,41 +131,50 @@ const Page = () => {
           </div>
         </div>
 
-        <div className='pt-2.5 pb-4 px-2.5 rounded-3xl h-48 bg-white-4 flex flex-col justify-between gap-3'>
+        <Link
+          href='/folder?folder=Want to watch'
+          className='pt-2.5 pb-4 px-2.5 rounded-3xl h-48 bg-white-4 flex flex-col justify-between gap-3 cursor-pointer hover:opacity-90 transition-opacity'
+        >
           <RoundButton
             variant='tertiary'
             icon='heart'
             className='w-fit'
           ></RoundButton>
           <div>
-            <p>Want to watch</p>
+            <p id='folder name'>Want to watch</p>
             <p>183 films • 20 episodes</p>
           </div>
-        </div>
+        </Link>
 
-        <div className='pt-2.5 pb-4 px-2.5 rounded-3xl h-48 bg-musical-purple flex flex-col justify-between gap-3'>
+        <Link
+          href='/folder?folder=Top films'
+          className='pt-2.5 pb-4 px-2.5 rounded-3xl h-48 bg-musical-purple flex flex-col justify-between gap-3 cursor-pointer hover:opacity-90 transition-opacity'
+        >
           <RoundButton
             variant='tertiary'
             icon='heart'
             className='w-fit'
           ></RoundButton>
           <div>
-            <p>Top films</p>
+            <p id='folder name'>Top films</p>
             <p>183 films • 20 episodes</p>
           </div>
-        </div>
+        </Link>
 
-        <div className='pt-2.5 pb-4 px-2.5 col-span-2 rounded-3xl h-48 bg-white-4 flex flex-col justify-between gap-3'>
+        <Link
+          href='/folder?folder=Watched'
+          className='pt-2.5 pb-4 px-2.5 col-span-2 rounded-3xl h-48 bg-white-4 flex flex-col justify-between gap-3 cursor-pointer hover:opacity-90 transition-opacity'
+        >
           <RoundButton
             variant='tertiary'
             icon='heart'
             className='w-fit'
           ></RoundButton>
           <div>
-            <p>Watched</p>
+            <p id='folder name'>Watched</p>
             <p>183 films • 20 episodes</p>
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   )

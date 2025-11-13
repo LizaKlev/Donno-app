@@ -9,74 +9,14 @@ export interface CastMember {
 }
 
 /**
- * Sample cast data for "The Grand Budapest Hotel".
- * Images use placeholder URLs sized 63x63. Replace with real assets as needed.
- */
-export const sampleCast: CastMember[] = [
-  {
-    id: 1,
-    name: 'Ralph Fiennes',
-    role: 'M. Gustave',
-    image: undefined,
-  },
-  {
-    id: 2,
-    name: 'Tony Revolori',
-    role: 'Zero Moustafa',
-    image: undefined,
-  },
-  {
-    id: 3,
-    name: 'Saoirse Ronan',
-    role: 'Agatha',
-    image: undefined,
-  },
-  {
-    id: 4,
-    name: 'Tilda Swinton',
-    role: 'Madame D.',
-    image: undefined,
-  },
-  {
-    id: 5,
-    name: 'Willem Dafoe',
-    role: 'Jopling',
-    image: undefined,
-  },
-  {
-    id: 6,
-    name: 'Adrien Brody',
-    role: 'Dmitri',
-    image: undefined,
-  },
-  {
-    id: 7,
-    name: 'Jude Law',
-    role: 'Young Author',
-    image: undefined,
-  },
-  {
-    id: 8,
-    name: 'Edward Norton',
-    role: 'Inspector Henckels',
-    image: undefined,
-  },
-  {
-    id: 9,
-    name: 'Bill Murray',
-    role: 'M. Ivan',
-    image: undefined,
-  },
-]
-
-/**
  * Single cast card component.
  * Expects a CastMember passed as the `member` prop.
  */
 const CastCard: React.FC<{ member: CastMember }> = ({ member }) => {
+  const actorUrl = `/actor-overview?actor=${encodeURIComponent(member.name)}`
   return (
     <Link
-      href='/actor-overview'
+      href={actorUrl}
       className='flex flex-col items-center gap-3 p-2 bg-white-4 rounded cursor-pointer hover:bg-white-8 transition-colors'
     >
       {member.image ? (
@@ -118,13 +58,25 @@ export default CastCard
 /**
  * Optional: a simple MovieCast component that renders the sample cast.
  * Import and use <MovieCast /> where you want to display the list.
+ * Can accept either CastMember[] or movie cast format { name, character, image }[]
  */
-export const MovieCast: React.FC<{ cast?: CastMember[] }> = ({
-  cast = sampleCast,
-}) => {
+export const MovieCast: React.FC<{
+  cast?: CastMember[]
+  movieCast?: Array<{ name: string; character: string; image?: string }>
+}> = ({ cast, movieCast }) => {
+  // If movieCast is provided, convert it to CastMember format
+  const castMembers: CastMember[] = movieCast
+    ? movieCast.map((mc, index) => ({
+        id: index + 1,
+        name: mc.name,
+        role: mc.character,
+        image: mc.image,
+      }))
+    : cast || []
+
   return (
     <div className='flex gap-6'>
-      {cast.map((m) => (
+      {castMembers.map((m) => (
         <CastCard key={m.id} member={m} />
       ))}
     </div>

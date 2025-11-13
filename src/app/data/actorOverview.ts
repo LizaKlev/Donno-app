@@ -1,35 +1,250 @@
 import type { actorOverview } from './review'
 
-export const sampleActorOverview: actorOverview = {
-  name: 'Tilda Swinton',
-  position: 'Actress',
-  image: 'https://via.placeholder.com/150',
-  quickLinks: ['Independent Films', 'Fantasy', 'Drama'],
-  age: 60,
-  birthDate: '1960-02-05',
-  deathDate: '2025-02-05',
-  birthplace: 'London, England',
-  awardsNumber: 10,
-  nominationsNumber: 10,
-  bio: 'Tilda Swinton is a British actress. She is best known for her role as The White Witch in the Chronicles of Narnia series.',
-  awards: [
-    {
-      name: 'Best Actor',
-      year: 2014,
-      image: 'https://via.placeholder.com/150',
-    },
-    {
-      name: 'Best Actress',
-      year: 2014,
-      image: 'https://via.placeholder.com/150',
-    },
-  ],
-  nominations: [
-    {
-      name: 'Best Actress',
-      year: 2014,
-      image: 'https://via.placeholder.com/150',
-    },
-  ],
-  movieNumber: 753,
-}
+export const sampleActorOverview: actorOverview[] = [
+  {
+    name: 'Tilda Swinton',
+    position: 'Actress',
+    image: 'https://via.placeholder.com/150',
+    quickLinks: ['Independent Films', 'Fantasy', 'Drama'],
+    age: 63,
+    birthDate: '1960-11-05',
+    deathDate: '',
+    birthplace: 'London, England',
+    awardsNumber: 10,
+    nominationsNumber: 10,
+    bio: 'Tilda Swinton is a British actress. She is best known for her role as The White Witch in the Chronicles of Narnia series.',
+    awards: [
+      {
+        name: 'Best Supporting Actress',
+        year: 2007,
+        image: 'https://via.placeholder.com/150',
+      },
+      {
+        name: 'Best Actress',
+        year: 2014,
+        image: 'https://via.placeholder.com/150',
+      },
+    ],
+    nominations: [
+      {
+        name: 'Best Actress',
+        year: 2014,
+        image: 'https://via.placeholder.com/150',
+      },
+    ],
+    movieNumber: 753,
+  },
+  {
+    name: 'Ralph Fiennes',
+    position: 'Actor',
+    image: 'https://via.placeholder.com/150',
+    quickLinks: ['Drama', 'Thriller', 'Historical'],
+    age: 61,
+    birthDate: '1962-12-22',
+    deathDate: '',
+    birthplace: 'Ipswich, England',
+    awardsNumber: 8,
+    nominationsNumber: 15,
+    bio: "Ralph Fiennes is an English actor known for his roles in Schindler's List, The English Patient, and the Harry Potter series as Lord Voldemort.",
+    awards: [
+      {
+        name: 'Best Actor',
+        year: 1996,
+        image: 'https://via.placeholder.com/150',
+      },
+      {
+        name: 'Best Supporting Actor',
+        year: 1993,
+        image: 'https://via.placeholder.com/150',
+      },
+    ],
+    nominations: [
+      {
+        name: 'Best Actor',
+        year: 1996,
+        image: 'https://via.placeholder.com/150',
+      },
+      {
+        name: 'Best Supporting Actor',
+        year: 1993,
+        image: 'https://via.placeholder.com/150',
+      },
+    ],
+    movieNumber: 642,
+  },
+  {
+    name: 'Bill Murray',
+    position: 'Actor',
+    image: 'https://via.placeholder.com/150',
+    quickLinks: ['Comedy', 'Drama', 'Independent Films'],
+    age: 73,
+    birthDate: '1950-09-21',
+    deathDate: '',
+    birthplace: 'Evanston, Illinois, USA',
+    awardsNumber: 12,
+    nominationsNumber: 18,
+    bio: 'Bill Murray is an American actor and comedian known for his deadpan delivery. He rose to fame on Saturday Night Live and starred in films like Ghostbusters and Groundhog Day.',
+    awards: [
+      {
+        name: 'Best Actor',
+        year: 2003,
+        image: 'https://via.placeholder.com/150',
+      },
+      {
+        name: 'Best Supporting Actor',
+        year: 2014,
+        image: 'https://via.placeholder.com/150',
+      },
+    ],
+    nominations: [
+      {
+        name: 'Best Actor',
+        year: 2003,
+        image: 'https://via.placeholder.com/150',
+      },
+      {
+        name: 'Best Supporting Actor',
+        year: 2014,
+        image: 'https://via.placeholder.com/150',
+      },
+    ],
+    movieNumber: 892,
+  },
+  {
+    name: 'Meryl Streep',
+    position: 'Actress',
+    image: 'https://via.placeholder.com/150',
+    quickLinks: ['Drama', 'Biographical', 'Comedy'],
+    age: 74,
+    birthDate: '1949-06-22',
+    deathDate: '',
+    birthplace: 'Summit, New Jersey, USA',
+    awardsNumber: 21,
+    nominationsNumber: 33,
+    bio: 'Meryl Streep is an American actress widely regarded as one of the greatest actresses of her generation. She has received more Academy Award nominations than any other actor.',
+    awards: [
+      {
+        name: 'Best Actress',
+        year: 1982,
+        image: 'https://via.placeholder.com/150',
+      },
+      {
+        name: 'Best Actress',
+        year: 2011,
+        image: 'https://via.placeholder.com/150',
+      },
+      {
+        name: 'Best Supporting Actress',
+        year: 1979,
+        image: 'https://via.placeholder.com/150',
+      },
+    ],
+    nominations: [
+      {
+        name: 'Best Actress',
+        year: 1982,
+        image: 'https://via.placeholder.com/150',
+      },
+      {
+        name: 'Best Actress',
+        year: 2011,
+        image: 'https://via.placeholder.com/150',
+      },
+    ],
+    movieNumber: 1124,
+  },
+  {
+    name: 'George Clooney',
+    position: 'Actor',
+    image: 'https://via.placeholder.com/150',
+    quickLinks: ['Drama', 'Thriller', 'Comedy'],
+    age: 62,
+    birthDate: '1961-05-06',
+    deathDate: '',
+    birthplace: 'Lexington, Kentucky, USA',
+    awardsNumber: 9,
+    nominationsNumber: 14,
+    bio: "George Clooney is an American actor, director, and producer. He gained fame on ER and went on to star in films like Ocean's Eleven and win an Academy Award for Syriana.",
+    awards: [
+      {
+        name: 'Best Supporting Actor',
+        year: 2005,
+        image: 'https://via.placeholder.com/150',
+      },
+      {
+        name: 'Best Picture',
+        year: 2012,
+        image: 'https://via.placeholder.com/150',
+      },
+    ],
+    nominations: [
+      {
+        name: 'Best Actor',
+        year: 2007,
+        image: 'https://via.placeholder.com/150',
+      },
+      {
+        name: 'Best Supporting Actor',
+        year: 2005,
+        image: 'https://via.placeholder.com/150',
+      },
+    ],
+    movieNumber: 687,
+  },
+  {
+    name: 'Bruce Willis',
+    position: 'Actor',
+    image: 'https://via.placeholder.com/150',
+    quickLinks: ['Action', 'Thriller', 'Comedy'],
+    age: 69,
+    birthDate: '1955-03-19',
+    deathDate: '',
+    birthplace: 'Idar-Oberstein, West Germany',
+    awardsNumber: 5,
+    nominationsNumber: 8,
+    bio: 'Bruce Willis is an American actor known for his roles in action films, particularly the Die Hard series. He has also appeared in comedies and dramas throughout his career.',
+    awards: [
+      {
+        name: 'Best Actor',
+        year: 1999,
+        image: 'https://via.placeholder.com/150',
+      },
+    ],
+    nominations: [
+      {
+        name: 'Best Actor',
+        year: 1999,
+        image: 'https://via.placeholder.com/150',
+      },
+    ],
+    movieNumber: 1023,
+  },
+  {
+    name: 'Gwyneth Paltrow',
+    position: 'Actress',
+    image: 'https://via.placeholder.com/150',
+    quickLinks: ['Drama', 'Romance', 'Comedy'],
+    age: 51,
+    birthDate: '1972-09-27',
+    deathDate: '',
+    birthplace: 'Los Angeles, California, USA',
+    awardsNumber: 7,
+    nominationsNumber: 12,
+    bio: 'Gwyneth Paltrow is an American actress and businesswoman. She won an Academy Award for Shakespeare in Love and is known for her roles in films like Iron Man and The Royal Tenenbaums.',
+    awards: [
+      {
+        name: 'Best Actress',
+        year: 1998,
+        image: 'https://via.placeholder.com/150',
+      },
+    ],
+    nominations: [
+      {
+        name: 'Best Actress',
+        year: 1998,
+        image: 'https://via.placeholder.com/150',
+      },
+    ],
+    movieNumber: 456,
+  },
+]

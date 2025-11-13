@@ -1,29 +1,25 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { RoundButton } from 'donno-app/components/ui/roundButton'
 import { Drawer } from 'donno-app/components/ui/drawer'
 import { DrawerTrigger } from 'donno-app/components/ui/drawer'
 import { DrawerContent } from 'donno-app/components/ui/drawer'
-import { DrawerHeader } from 'donno-app/components/ui/drawer'
-import { DrawerTitle } from 'donno-app/components/ui/drawer'
-import { DrawerDescription } from 'donno-app/components/ui/drawer'
 import { DrawerFooter } from 'donno-app/components/ui/drawer'
-import { DrawerClose } from 'donno-app/components/ui/drawer'
 import { Button } from 'donno-app/components/ui/button'
 import { useIsMobile } from 'donno-app/hooks/use-mobile'
 import { Dialog } from 'donno-app/components/ui/dialog'
 import { DialogTrigger } from 'donno-app/components/ui/dialog'
 import { DialogContent } from 'donno-app/components/ui/dialog'
 import { DialogHeader } from 'donno-app/components/ui/dialog'
-import { DialogTitle } from 'donno-app/components/ui/dialog'
-import { DialogDescription } from 'donno-app/components/ui/dialog'
 import { DialogFooter } from 'donno-app/components/ui/dialog'
-import { Box } from 'lucide-react'
-import { Badge } from 'donno-app/components/ui/badge'
+import { Box, Heart } from 'lucide-react'
 import { MovieCast } from 'donno-app/components/castCard'
 import { sampleActorOverview } from 'donno-app/app/data/actorOverview'
 import { PlatformList } from 'donno-app/components/PlatformCard'
 import { NomineeCard } from 'donno-app/components/AwardCard'
+import { Separator } from 'donno-app/components/ui/separator'
+import { toast } from 'sonner'
 
 const TABS = [
   { id: 'cast', label: 'Known For' },
@@ -32,9 +28,25 @@ const TABS = [
   { id: 'upcoming', label: 'Upcoming' },
 ]
 
+const FAVOURITE_ICON = Heart
+
 const Page = () => {
   const isMobile = useIsMobile()
   const [activeTab, setActiveTab] = useState('cast')
+  const searchParams = useSearchParams()
+  const actorParam = searchParams.get('actor')
+  const selectedActor = useMemo(() => {
+    if (!actorParam) {
+      return sampleActorOverview[0]
+    }
+    const decodedName = decodeURIComponent(actorParam)
+    return (
+      sampleActorOverview.find(
+        (item) => item.name.toLowerCase() === decodedName.toLowerCase()
+      ) || sampleActorOverview[0]
+    )
+  }, [actorParam])
+  const actor = selectedActor
   return (
     <div className='max-w-6xl w-full  px-2 pb-20'>
       <div className='sticky top-3.5 left-3.5 right-3.5 z-50 flex justify-between'>
@@ -46,38 +58,104 @@ const Page = () => {
         {isMobile ? (
           <Drawer direction='top'>
             <DrawerTrigger asChild>
-              <RoundButton variant='secondary' icon='hamburger' />
+              <button
+                type='button'
+                className='rounded-full outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring'
+              >
+                <RoundButton variant='secondary' icon='hamburger' />
+              </button>
             </DrawerTrigger>
-            <DrawerContent>
-              <DrawerHeader>
-                <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-                <DrawerDescription>
-                  This action cannot be undone.
-                </DrawerDescription>
-              </DrawerHeader>
-              <DrawerFooter>
-                <Button>Submit</Button>
-                <DrawerClose>
-                  <Button variant='outline'>Cancel</Button>
-                </DrawerClose>
+            <DrawerContent className='gap-0 border-[0.3px] border-white-12 mx-2.5'>
+              <div className='flex items-center gap-2 pb-3 '>
+                <Box className='w-[32px] h-[32px] bg-accent text-accent-foreground rounded-[8px]' />
+                <p> {actor.name} </p>
+              </div>
+              <Separator />
+              <DrawerFooter className='p-0'>
+                <Button
+                  variant='ghost'
+                  className='justify-start hover:text-bold hover:bg-white-4 '
+                  onClick={() =>
+                    toast.success('Film is added to your Liked films')
+                  }
+                >
+                  <FAVOURITE_ICON className='size-4' />
+                  Follow
+                </Button>
+                <Button
+                  variant='ghost'
+                  className='justify-start hover:text-bold hover:bg-white-4 '
+                  onClick={() =>
+                    toast.success('Film is added to your Liked films')
+                  }
+                >
+                  <FAVOURITE_ICON className='size-4' />
+                  Do not recommend
+                </Button>
+                <Button
+                  variant='ghost'
+                  className='justify-start hover:text-bold hover:bg-white-4 '
+                  onClick={() =>
+                    toast.success('Film is added to your Liked films')
+                  }
+                >
+                  <FAVOURITE_ICON className='size-4' />
+                  Share
+                </Button>
               </DrawerFooter>
             </DrawerContent>
           </Drawer>
         ) : (
           <Dialog>
             <DialogTrigger asChild>
-              <RoundButton variant='secondary' icon='hamburger' />
+              <button
+                type='button'
+                className='rounded-full outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring'
+              >
+                <RoundButton variant='secondary' icon='hamburger' />
+              </button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Are you absolutely sure?</DialogTitle>
-                <DialogDescription>
-                  This action cannot be undone.
-                </DialogDescription>
+                <div className='flex items-center gap-2 pb-3'>
+                  <Box className='w-[32px] h-[32px] bg-accent text-accent-foreground rounded-[8px]' />
+                  <p> {actor.name} </p>
+                </div>
               </DialogHeader>
+              <Separator />
               <DialogFooter>
-                <Button>Submit</Button>
-                <Button variant='outline'>Cancel</Button>
+                <div className='flex flex-col w-full'>
+                  <Button
+                    variant='ghost'
+                    className='justify-start hover:text-bold hover:bg-white-4 '
+                    onClick={() =>
+                      toast.success('Film is added to your Liked films')
+                    }
+                  >
+                    <FAVOURITE_ICON className='size-4' />
+                    Follow
+                  </Button>
+                  <Button
+                    variant='ghost'
+                    className='justify-start hover:text-bold hover:bg-white-4 '
+                    onClick={() =>
+                      toast.success('Film is added to your Liked films')
+                    }
+                  >
+                    <FAVOURITE_ICON className='size-4' />
+                    Do not recommend
+                  </Button>
+                  <Button
+                    variant='ghost'
+                    className='justify-start hover:text-bold hover:bg-white-4 '
+                    onClick={() =>
+                      toast.success('Film is added to your Liked films')
+                    }
+                  >
+                    <FAVOURITE_ICON className='size-4' />
+                    Share
+                  </Button>
+                </div>
               </DialogFooter>
             </DialogContent>
           </Dialog>
@@ -87,68 +165,34 @@ const Page = () => {
       <div className='w-full flex flex-col items-center justify-center'>
         <Box className='w-3/4 bg-accent h-96 text-muted-foreground max-lg:w-3/4' />
         <div className='w-full flex justify-between'>
-          <p className='w-full'>{sampleActorOverview.name}</p>
+          <p className='w-full'>{actor.name}</p>
 
-          {isMobile ? (
-            <Drawer direction='top'>
-              <DrawerTrigger asChild>
-                <RoundButton variant='secondary' icon='hamburger' />
-              </DrawerTrigger>
-              <DrawerContent>
-                <DrawerHeader>
-                  <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-                  <DrawerDescription>
-                    This action cannot be undone.
-                  </DrawerDescription>
-                </DrawerHeader>
-                <DrawerFooter>
-                  <Button>Submit</Button>
-                  <DrawerClose>
-                    <Button variant='outline'>Cancel</Button>
-                  </DrawerClose>
-                </DrawerFooter>
-              </DrawerContent>
-            </Drawer>
-          ) : (
-            <Dialog>
-              <DialogTrigger asChild>
-                <RoundButton variant='primary' icon='user' />
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Are you absolutely sure?</DialogTitle>
-                  <DialogDescription>
-                    This action cannot be undone.
-                  </DialogDescription>
-                </DialogHeader>
-                <DialogFooter>
-                  <Button>Submit</Button>
-                  <Button variant='outline'>Cancel</Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          )}
+          <RoundButton
+            variant='primary'
+            icon='user'
+            onClick={() => toast.success(`You follow ${actor.name} now`)}
+          />
         </div>
-        <p className='w-full'>{sampleActorOverview.position}</p>
+        <p className='w-full'>{actor.position}</p>
         <div className='flex gap-4 w-full'>
           <div className='flex flex-col'>
             <p>Age</p>
-            <p>{sampleActorOverview.age}</p>
+            <p>{actor.age}</p>
           </div>
           <div className='flex flex-col'>
             <p>Born</p>
-            <p>{sampleActorOverview.birthplace}</p>
+            <p>{actor.birthplace}</p>
           </div>
           <div className='flex flex-col'>
             <p>Awards</p>
-            <p>{sampleActorOverview.awardsNumber}</p>
+            <p>{actor.awardsNumber}</p>
           </div>
           <div className='flex flex-col'>
             <p>Nominations</p>
-            <p>{sampleActorOverview.nominationsNumber}</p>
+            <p>{actor.nominationsNumber}</p>
           </div>
         </div>
-        <p className='w-full'>{sampleActorOverview.bio}</p>
+        <p className='w-full'>{actor.bio}</p>
         {/* --- TABS MENU --- */}
         <div className='flex w-full lg:w-2/3 justify-between border border-white/10 rounded-full'>
           {TABS.map((tab) => (
