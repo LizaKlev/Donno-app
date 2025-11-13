@@ -16,7 +16,6 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
-  DrawerDescription,
   DrawerFooter,
   DrawerClose,
 } from 'donno-app/components/ui/drawer'
@@ -120,15 +119,20 @@ const Page = () => {
 
       <div className='grid grid-cols-2 md:grid-cols-5 grid-rows-3 gap-1'>
         <div className='pt-2.5 pb-4 px-2.5 rounded-3xl h-48 bg-crime-red col-span-2 md:col-span-4 flex flex-col justify-between gap-3'>
-          <RoundButton
-            variant='tertiary'
-            icon='heart'
-            className='w-fit'
-          ></RoundButton>
-          <div>
-            <p>Liked films</p>
-            <p>183 films • 20 episodes</p>
-          </div>
+          <Link
+            href='/folder?folder=Liked films'
+            className='pt-2.5 pb-4 px-2.5 rounded-3xl h-48 bg-white-4 flex flex-col justify-between gap-3 cursor-pointer hover:opacity-90 transition-opacity'
+          >
+            <RoundButton
+              variant='tertiary'
+              icon='heart'
+              className='w-fit'
+            ></RoundButton>
+            <div>
+              <p id='folder name'>Liked films</p>
+              <p>183 films • 20 episodes</p>
+            </div>
+          </Link>
         </div>
 
         <Link

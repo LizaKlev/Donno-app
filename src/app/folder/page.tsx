@@ -29,6 +29,8 @@ import {
   AccordionContent,
 } from 'donno-app/components/ui/accordion'
 import { Separator } from 'donno-app/components/ui/separator'
+import FilmList from 'donno-app/components/filmList'
+import { sampleMovieOverview } from 'donno-app/app/data/movieOverview'
 
 const FAVOURITE_ICON = Heart
 
@@ -41,11 +43,8 @@ const Page = () => {
   return (
     <div className='max-w-6xl w-full  px-2 pb-20'>
       <div className='sticky top-3.5 left-3.5 right-3.5 z-50 flex justify-between'>
-        <RoundButton
-          variant='primary'
-          href='/recommendations'
-          icon='chevron-left'
-        />
+        <RoundButton variant='primary' href='/home' icon='chevron-left' />
+        <p>{folderName}</p>
         {isMobile ? (
           <Drawer direction='top'>
             <DrawerTrigger asChild>
@@ -272,6 +271,14 @@ const Page = () => {
             </DialogContent>
           </Dialog>
         )}
+      </div>
+      <p>{folderName}</p>
+      <p>12 movies</p>
+      <Separator />
+      <div className='flex flex-col gap-4'>
+        {sampleMovieOverview.map((movie) => (
+          <FilmList key={movie.name} movie={movie} />
+        ))}
       </div>
     </div>
   )

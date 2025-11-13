@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 
-import { Box, Heart, Plus } from 'lucide-react'
+import { Box, Heart } from 'lucide-react'
 import { Badge } from 'donno-app/components/ui/badge'
 import { Button } from 'donno-app/components/ui/button'
 import { MovieCast } from 'donno-app/components/castCard'
