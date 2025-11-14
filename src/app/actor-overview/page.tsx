@@ -52,7 +52,7 @@ const Page = () => {
       <div className='sticky top-3.5 left-3.5 right-3.5 z-50 flex justify-between'>
         <RoundButton
           variant='primary'
-          href='/recommendations'
+          href='/film-overview'
           icon='chevron-left'
         />
         {isMobile ? (

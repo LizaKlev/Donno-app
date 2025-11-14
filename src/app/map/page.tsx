@@ -27,13 +27,13 @@ const page = () => {
                   <BreadcrumbSeparator />
 
                   <BreadcrumbItem>
-                    <BreadcrumbLink href='/map'>Place</BreadcrumbLink>
+                    <BreadcrumbPage>Place</BreadcrumbPage>
                   </BreadcrumbItem>
 
                   <BreadcrumbSeparator />
 
                   <BreadcrumbItem>
-                    <BreadcrumbPage>Time</BreadcrumbPage>
+                    <BreadcrumbLink href='/time-range'>Time</BreadcrumbLink>
                   </BreadcrumbItem>
 
                   <BreadcrumbSeparator />
@@ -50,12 +50,7 @@ const page = () => {
           </div>
         </div>
       </div>
-      <Slider
-        // defaultValue={[20, 80]} min={0} max={100}
-        defaultValue={[33]}
-        max={100}
-        step={1}
-      />
+
       <div className='sticky bottom-20 md:bottom-4 left-0 z-20 px-2 flex w-full justify-center gap-4 mb-1'>
         <Button variant={'secondary'} className='w-1/3' asChild>
           <Link href='/recommendations'>Skip</Link>

@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Link from 'next/link'
 
 import { Input } from '../components/ui/input'
 import { Button } from '../components/ui/button'
@@ -33,6 +34,12 @@ export default function Page() {
                 <BreadcrumbList>
                   <BreadcrumbItem>
                     <BreadcrumbPage>Genre</BreadcrumbPage>
+                  </BreadcrumbItem>
+
+                  <BreadcrumbSeparator />
+
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href='/map'>Place</BreadcrumbLink>
                   </BreadcrumbItem>
 
                   <BreadcrumbSeparator />
@@ -79,10 +86,12 @@ export default function Page() {
       </div>
 
       <div className='sticky bottom-20 md:bottom-4 left-0 z-20 px-2 flex w-full justify-center gap-4 mb-1'>
-        <Button variant={'secondary'} className='w-1/3'>
-          Apply
+        <Button variant={'secondary'} className='w-1/3' asChild>
+          <Link href='/map'>Skip</Link>
         </Button>
-        <Button className='w-1/3'>Reset</Button>
+        <Button className='w-1/3'>
+          <Link href='/map'>Confirm</Link>
+        </Button>
       </div>
     </div>
   )

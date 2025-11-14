@@ -46,6 +46,7 @@ function RoundButton({
   asChild = false,
   icon,
   href,
+  children,
   ...props
 }: (React.ComponentProps<'button'> | React.ComponentProps<'a'>) &
   VariantProps<typeof buttonVariants> & {
@@ -81,6 +82,7 @@ function RoundButton({
         {...props}
       >
         {renderIcon()}
+        {children}
       </Comp>
     )
   }
@@ -94,6 +96,7 @@ function RoundButton({
         {...(props as React.ComponentProps<'a'>)}
       >
         {renderIcon()}
+        {children}
       </a>
     )
   }
@@ -105,6 +108,7 @@ function RoundButton({
       {...(props as React.ComponentProps<'button'>)}
     >
       {renderIcon()}
+      {children}
     </button>
   )
 }

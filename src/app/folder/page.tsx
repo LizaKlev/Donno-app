@@ -273,11 +273,11 @@ const Page = () => {
         )}
       </div>
       <p>{folderName}</p>
-      <p>12 movies</p>
+      <p>{sampleMovieOverview.length} movies</p>
       <Separator />
       <div className='flex flex-col gap-4'>
-        {sampleMovieOverview.map((movie) => (
-          <FilmList key={movie.name} movie={movie} />
+        {sampleMovieOverview.map((movie, index) => (
+          <FilmList key={movie.name} movie={movie} number={index} />
         ))}
       </div>
     </div>
