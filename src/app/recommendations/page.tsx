@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { RecommendationList } from 'donno-app/components/Recommendations'
 import { RoundButton } from 'donno-app/components/ui/roundButton'
 import { Drawer } from 'donno-app/components/ui/drawer'
@@ -16,6 +17,7 @@ import { Heart } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { Separator } from 'donno-app/components/ui/separator'
+import { AutosuggestField } from 'donno-app/components/AutosuggestField'
 
 import {
   Accordion,
@@ -35,8 +37,54 @@ import {
 
 const FAVOURITE_ICON = Heart
 
+type SortOption = 'Match percentage' | 'Highest rating' | 'Name' | 'Year'
+type FilterOption = 'Platform' | 'Language' | 'Country' | 'None'
+
 const Page = () => {
   const isMobile = useIsMobile()
+  const [selectedSort, setSelectedSort] =
+    useState<SortOption>('Match percentage')
+  const [selectedFilter, setSelectedFilter] = useState<FilterOption>('None')
+  // Store selected countries for filtering recommendations
+  const [selectedCountries, setSelectedCountries] = useState<string[]>([])
+  // Store selected languages for filtering recommendations
+  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
+
+  const handleCountrySelectionChange = (countries: string[]) => {
+    setSelectedCountries(countries)
+  }
+
+  const handleLanguageSelectionChange = (languages: string[]) => {
+    setSelectedLanguages(languages)
+  }
+
+  const COMMON_LANGUAGES = [
+    'English',
+    'Spanish',
+    'French',
+    'German',
+    'Italian',
+    'Portuguese',
+    'Russian',
+    'Chinese',
+    'Japanese',
+    'Korean',
+    'Hindi',
+    'Arabic',
+    'Turkish',
+    'Polish',
+    'Dutch',
+    'Swedish',
+    'Norwegian',
+    'Danish',
+    'Finnish',
+    'Greek',
+    'Czech',
+    'Hungarian',
+    'Romanian',
+    'Thai',
+    'Vietnamese',
+  ]
   return (
     <div className='px-2 pb-20 '>
       <div className='sticky top-3.5 left-3.5 right-3.5 z-50 flex justify-between'>
@@ -76,15 +124,27 @@ const Page = () => {
                 <Accordion type='single' collapsible className='p-0'>
                   <AccordionItem value='item-1' className='p-0'>
                     <AccordionTrigger className='p-x pt-2.5 pb-2 hover:bg-white-4 rounded-full w-full items-baseline px-3'>
-                      <div className='flex gap-1.5'>
+                      <div className='flex gap-1.5 items-center flex-1'>
                         <FAVOURITE_ICON className='size-4' />
-                        Sort by
+                        <span>Sort by</span>
+                        <span className='text-white/70 ml-auto mr-2'>
+                          {selectedSort}
+                        </span>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent className='p-0'>
                       <Button
                         variant='ghost'
                         className='justify-start w-full pl-8.5 text-white/70 hover:bg-white/0 hover:text-white/90'
+                        onClick={() => setSelectedSort('Match percentage')}
+                      >
+                        Match percentage
+                      </Button>
+
+                      <Button
+                        variant='ghost'
+                        className='justify-start w-full pl-8.5 text-white/70 hover:bg-white/0 hover:text-white/90'
+                        onClick={() => setSelectedSort('Highest rating')}
                       >
                         Highest rating
                       </Button>
@@ -92,12 +152,14 @@ const Page = () => {
                       <Button
                         variant='ghost'
                         className='justify-start w-full pl-8.5 text-white/70 hover:bg-white/0 hover:text-white/90'
+                        onClick={() => setSelectedSort('Name')}
                       >
                         Name
                       </Button>
                       <Button
                         variant='ghost'
                         className='justify-start w-full pl-8.5 text-white/70 hover:bg-white/0 hover:text-white/90'
+                        onClick={() => setSelectedSort('Year')}
                       >
                         Year
                       </Button>
@@ -105,32 +167,43 @@ const Page = () => {
                   </AccordionItem>
                 </Accordion>
                 <Accordion type='single' collapsible className='p-0'>
-                  <AccordionItem value='item-1' className='p-0'>
+                  <AccordionItem value='item-2' className='p-0'>
                     <AccordionTrigger className='p-x pt-2.5 pb-2 hover:bg-white-4 rounded-full w-full items-baseline px-3'>
-                      <div className='flex gap-1.5'>
+                      <div className='flex gap-1.5 items-center flex-1'>
                         <FAVOURITE_ICON className='size-4' />
-                        Filter
+                        <span>Filter</span>
+                        <span className='text-white/70 ml-auto mr-2'>
+                          {selectedFilter}
+                        </span>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent className='p-0'>
                       <Button
                         variant='ghost'
                         className='justify-start w-full pl-8.5 text-white/70 hover:bg-white/0 hover:text-white/90'
+                        onClick={() => setSelectedFilter('Platform')}
                       >
-                        Language
+                        Platform
                       </Button>
+
+                      <AutosuggestField
+                        label='Language'
+                        options={COMMON_LANGUAGES}
+                        placeholder='Type to search languages...'
+                        onSelectionChange={handleLanguageSelectionChange}
+                      />
+
+                      <AutosuggestField
+                        label='Country'
+                        onSelectionChange={handleCountrySelectionChange}
+                      />
 
                       <Button
                         variant='ghost'
                         className='justify-start w-full pl-8.5 text-white/70 hover:bg-white/0 hover:text-white/90'
+                        onClick={() => setSelectedFilter('None')}
                       >
-                        Country
-                      </Button>
-                      <Button
-                        variant='ghost'
-                        className='justify-start w-full pl-8.5 text-white/70 hover:bg-white/0 hover:text-white/90'
-                      >
-                        Platform
+                        None
                       </Button>
                     </AccordionContent>
                   </AccordionItem>
